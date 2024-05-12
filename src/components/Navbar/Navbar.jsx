@@ -72,13 +72,13 @@ const Navbar = () => {
         }
     </>
     return (
-        <div className={`flex justify-between p-2 ${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"} top-0 z-10 font-bold`}>
+        <div className={`flex justify-between p-2 ${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"} top-0 z-10 font-bold sticky`}>
             <div className="justify-start flex items-center ">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </div>
-                    <ul tabIndex={0} className={`menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow  ${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"} rounded-box w-52 space-y-2`}>
+                    <ul tabIndex={0} className={`menu menu-sm dropdown-content mt-3 z-[2] p-2 shadow  ${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"} rounded-box w-52 space-y-2`}>
                         {
                             navLinks
                         }
@@ -90,7 +90,7 @@ const Navbar = () => {
                 </Link>
             </div>
             <div className="justify-end hidden lg:flex">
-                <ul className={`menu menu-horizontal px-1 flex justify-center items-center`}>
+                <ul className={`menu menu-horizontal px-1 flex justify-center z-10 items-center`}>
                     {
                         navLinks
                     }
