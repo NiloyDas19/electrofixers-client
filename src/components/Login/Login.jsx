@@ -10,7 +10,7 @@ import DocumentTitle from './../../documentTitle/DocumentTitle';
 const Login = () => {
     DocumentTitle('Login');
     const [showPassword, setShowPassword] = useState(false);
-    const { loginWithEmailPassword, loginWithGoogle , setLoading, isDark } = useContext(AuthContext);
+    const { loginWithEmailPassword, loginWithGoogle, setLoading, isDark } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     console.log(location);
@@ -69,8 +69,8 @@ const Login = () => {
 
 
     return (
-        <div className="hero min-h-screen mx-auto" data-aos = "zoom-in-down">
-            <div className={`card w-full md:w-1/2 max-w-sm md:max-w-xl shadow-2xl  p-10 ${isDark === 'dark' ? "bg-[#28185d]" : "bg-base-100"}`}>
+        <div className="hero min-h-screen mx-auto" data-aos="zoom-in-down">
+            <div className={`card w-full md:w-1/2 max-w-sm md:max-w-xl shadow-2xl  p-10 ${isDark === 'dark' ? "bg-[#28185d] shadow-orange-200" : "bg-base-100"}`}>
                 <div className="text-center mt-5">
                     <h2 className="text-2xl md:text-4xl text-blue-500 font-bold">Login Here</h2>
                 </div>
@@ -79,7 +79,7 @@ const Login = () => {
                         <label className="label">
                             <span className="">Email</span>
                         </label>
-                        <input type="email" placeholder="email" name="email" className={`${isDark === 'dark' ? "bg-[#351f7e] border-blue hover:border-black" : "bg-slate-50"} input input-bordered w-full`}required />
+                        <input type="email" placeholder="email" name="email" className={`${isDark === 'dark' ? "bg-[#351f7e] border-blue hover:border-black" : "bg-slate-50"} input input-bordered w-full`} required />
                     </div>
                     <div className="form-control relative">
                         <label className="label">
@@ -99,10 +99,16 @@ const Login = () => {
                         <button className="btn btn-primary">Login</button>
                     </div>
                 </form>
-                <div className="text-center flex flex-col space-y-2 mt-5">
-                    <div className="border-b-2 border-orange-500"></div>
-                    <button className="btn btn-outline btn-secondary w-full" onClick={handleLoginWithGoogle}><FcGoogle></FcGoogle> Login With Google</button>
-                    <p className="text-black">Do not have an account ? <span className="font-bold text-red-600"><Link state={location?.state} to="/register">Register here</Link></span></p>
+
+                <div className="flex mt-5 justify-center items-center gap-1">
+                    <div className="h-1 w-full bg-orange-500"></div>
+                    <div className="text-xl font-bold">Social</div>
+                    <div className="h-1 w-full bg-orange-500"></div>
+                </div>
+
+                <div className="text-center flex flex-col space-y-2 mt-5 items-center">
+                    <FcGoogle className="h-16 w-16 cursor-pointer" onClick={handleLoginWithGoogle}></FcGoogle>
+                    <p className="">Do not have an account ? <span className="font-bold text-red-600"><Link state={location?.state} to="/register">Register here</Link></span></p>
                 </div>
             </div>
         </div>

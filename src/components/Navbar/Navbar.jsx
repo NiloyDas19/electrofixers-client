@@ -72,7 +72,7 @@ const Navbar = () => {
         }
     </>
     return (
-        <div className={`flex justify-between p-2 ${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"} top-0 z-10 font-bold sticky`}>
+        <div className={`flex justify-between p-2 ${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"} top-0 z-10 font-bold sticky border-b-2 border-orange-500`}>
             <div className="justify-start flex items-center ">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

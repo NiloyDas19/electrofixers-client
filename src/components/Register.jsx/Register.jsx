@@ -99,7 +99,7 @@ const Register = () => {
 
     return (
         <div className="hero min-h-screen mx-auto pt-20">
-            <div className={`card w-full md:w-1/2 max-w-sm md:max-w-xl shadow-2xl  p-10 ${isDark === 'dark' ? "bg-[#28185d]" : "bg-base-100"}`}>
+            <div className={`card w-full md:w-1/2 max-w-sm md:max-w-xl shadow-2xl  p-10 ${isDark === 'dark' ? "bg-[#28185d] shadow-orange-200" : "bg-base-100"}`}>
                 <div className="text-center mt-5">
                     <h2 className="text-2xl md:text-4xl text-blue-500 font-bold">Register Here</h2>
                 </div>
@@ -140,9 +140,14 @@ const Register = () => {
                         <button className="btn btn-primary">Register</button>
                     </div>
                 </form>
-                <div className="text-center flex flex-col space-y-2 mt-5">
-                    <div className="border-b-2 border-orange-500"></div>
-                    <button className="btn btn-outline btn-secondary w-full" onClick={handleRegisterWithGoogle}><FcGoogle></FcGoogle> Register With Google</button>                    <p className="">Already have an account ? <span className="font-bold text-blue-600"><Link to="/login">Login Here</Link></span></p>
+                <div className="flex mt-5 justify-center items-center gap-1">
+                    <div className="h-1 w-full bg-orange-500"></div>
+                    <div className="text-xl font-bold">Social</div>
+                    <div className="h-1 w-full bg-orange-500"></div>
+                </div>
+                <div className="text-center flex flex-col space-y-2 mt-5 items-center">
+                    <FcGoogle className="h-16 w-16 cursor-pointer" onClick={handleRegisterWithGoogle}></FcGoogle>
+                    <p className="">Already have an account ? <span className="font-bold text-blue-600"><Link to="/login">Login Here</Link></span></p>
                 </div>
 
             </div>
