@@ -42,15 +42,15 @@ const Navbar = () => {
             </label>
         </li>
         <li><Link to="/">Home</Link></li>
-        <li><Link>Services</Link></li>
+        <li><Link to="/all-services">Services</Link></li>
         {  user && <li>
                 <details>
                     <summary>Dashboard</summary>
                     <ul className={`${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"}`}>
-                        <li><Link>Add Service</Link></li>
-                        <li><Link>Manage Service</Link></li>
-                        <li><Link>Booked Services</Link></li>
-                        <li><Link>Service To Do</Link></li>
+                        <li><Link to="/add-service">Add Service</Link></li>
+                        <li><Link to="/manage-service">Manage Service</Link></li>
+                        <li><Link to="/booked-services">Booked Services</Link></li>
+                        <li><Link to="/service-to-do">Service To Do</Link></li>
                     </ul>
                 </details>
             </li>
@@ -65,14 +65,14 @@ const Navbar = () => {
                             </div>
                         </div>
                     </li>
-                    <li className="btn btn-primary" onClick={handleLogOut}><Link to="/" >Logout</Link></li>
+                    <li onClick={handleLogOut}><Link to="/" className="btn btn-outline bg-orange-500 px-6 font-bold" >Logout</Link></li>
                 </>
                 :
-                <li className="btn btn-primary" ><Link to="/login">Login</Link></li>
+                <li><Link to="/login" className="btn btn-outline bg-orange-500 px-6 font-bold">Login</Link></li>
         }
     </>
     return (
-        <div className={`flex justify-between p-2 ${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"} top-0 z-10`}>
+        <div className={`flex justify-between p-2 ${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"} top-0 z-10 font-bold`}>
             <div className="justify-start flex items-center ">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -86,7 +86,7 @@ const Navbar = () => {
                 </div>
                 <Link to="/" className="flex justify-center items-center cursor-pointer">
                     <img src={logo} alt="" className="w-16 h-12" />
-                    <a className="text-3xl">ELECTROFIXERS</a>
+                    <a className="text-3xl font-semibold">ELECTRO<span className="text-orange-500">FIXERS</span></a>
                 </Link>
             </div>
             <div className="justify-end hidden lg:flex">

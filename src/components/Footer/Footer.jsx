@@ -9,7 +9,7 @@ const Footer = () => {
         <footer className={`${isDark === 'dark' ? "bg-[#150d32]" : "bg-base-200"} footer footer-center p-10  mt-10`}>
             <aside>
                 <img src={logo} alt="" className="w-16 h-12"/>
-                <p>ELCTROFIXERS</p>
+                <p className="text-3xl font-bold">ELCTRO<span className="text-orange-500">FIXERS</span></p>
                 <p>Providing reliable tech since 2024</p>
             </aside>
             <nav>
