@@ -14,34 +14,34 @@ const AddService = () => {
         const providerName = user?.displayName;
         const providerImageUrl = user?.photoURL;
         const serviceName = form.service_name.value;
-        const serviceArea = form.elements.service_area.value;
+        const serviceArea = form.service_area.value;
         const price = form.service_price.value;
         const description = form.service_description.value;
         const imageUrl = form.image.value;
 
-        const newService = { imageUrl, serviceName, price, serviceArea, description, providerEmail, providerImageUrl, providerName};
+        const newService = { imageUrl, serviceName, price, serviceArea, description, providerEmail, providerImageUrl, providerName };
 
         console.log(newService);
 
-        // fetch('https://dream-destination-server-side.vercel.app/addTouristsSpot', {
-        //     method: "POST",
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(newTouristsSpot)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (data.insertedId) {
-        //             swal({
-        //                 title: "Good job!",
-        //                 text: "Tourists Spot Added Successfully",
-        //                 icon: "success",
-        //                 button: "ok!",
-        //             });
-        //             form.reset();
-        //         }
-        //     })
+        fetch('http://localhost:5000/services', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newService)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    swal({
+                        title: "Good job!",
+                        text: "Service Added Successfully",
+                        icon: "success",
+                        button: "ok!",
+                    });
+                    form.reset();
+                }
+            })
     }
 
     return (
@@ -77,31 +77,11 @@ const AddService = () => {
                         </div>
                         <div className="md:flex gap-10">
                             <div className="w-full">
-                                <label className="form-control w-full">
+                                <label className="form-control w-full ">
                                     <div className="label">
                                         <span className="font-bold">Service Area</span>
                                     </div>
-                                    <select name="service_area" className={`${isDark === 'dark' ? "bg-[#351f7e] border-blue hover:border-black" : "bg-slate-50"} input input-bordered w-full`} required>
-                                        <option selected>Select the Service Area</option>
-                                        <option value="Television Repair">Television Repair</option>
-                                        <option value="Smartphone Repair">Smartphone Repair</option>
-                                        <option value="Laptop Repair">Laptop Repair</option>
-                                        <option value="Tablet Repair">Tablet Repair</option>
-                                        <option value="Camera Repair">Camera Repair</option>
-                                        <option value="Gaming Console Repair">Gaming Console Repair</option>
-                                        <option value="Printer Repair">Printer Repair</option>
-                                        <option value="Home Appliance Repair">Home Appliance Repair</option>
-                                        <option value="Audio System Repair">Audio System Repair</option>
-                                        <option value="Computer Repair">Computer Repair</option>
-                                        <option value="Fan Repair">Fan Repair</option>
-                                        <option value="Light Fixture Repair">Light Fixture Repair</option>
-                                        <option value="Microwave Repair">Microwave Repair</option>
-                                        <option value="Refrigerator Repair">Refrigerator Repair</option>
-                                        <option value="Air Conditioner Repair">Air Conditioner Repair</option>
-                                        <option value="Washing Machine Repair">Washing Machine Repair</option>
-                                        <option value="Dishwasher Repair">Dishwasher Repair</option>
-                                        <option value="Vacuum Cleaner Repair">Vacuum Cleaner Repair</option>
-                                    </select>
+                                    <input type="text" name="service_area" placeholder="Enter your service area" className={`${isDark === 'dark' ? "bg-[#351f7e] border-blue hover:border-black" : "bg-slate-50"} input input-bordered w-full`} required />
                                 </label>
                             </div>
                         </div>
