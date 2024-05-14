@@ -1,20 +1,19 @@
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 
-const ServiceCard = ({service}) => {
-    const {_id, imageUrl, serviceName, description, providerImageUrl, providerName, price, serviceArea } = service;
+const PopularServicesCard = ({service}) => {
+    const {_id, imageUrl, serviceName, description, providerImageUrl, providerName, price } = service;
     return (
         <div className="flex flex-col space-y-5 border-2 rounded-3xl border-orange-100">
             <div className="rounded-t-3xl">
                 <img src={imageUrl} className="rounded-t-3xl" alt="" />
             </div>
-            <div className="flex-grow px-6 text-center">
+            <div className="flex-grow flex justify-between px-6">
                 <h2 className="text-3xl font-bold">{serviceName}</h2>
-                <p>{description}</p>
-            </div>
-            <div className="px-6 flex justify-between">
-                <p className="text-3xl">{serviceArea}</p>
                 <p className="text-3xl">{price}</p>
+            </div>
+            <div className="px-6">
+                <p>{description}</p>
             </div>
             <div className="flex justify-between px-6 pb-6">
                 <div className="flex items-center gap-2">
@@ -29,8 +28,8 @@ const ServiceCard = ({service}) => {
     );
 };
 
-ServiceCard.propTypes = {
+PopularServicesCard.propTypes = {
     service : PropTypes.object.isRequired,
 }
 
-export default ServiceCard;
+export default PopularServicesCard;
