@@ -49,15 +49,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/manage-service",
-        element: <PrivateRoutes><ManageService></ManageService></PrivateRoutes>
+        element: <PrivateRoutes><ManageService></ManageService></PrivateRoutes>,
+        loader: () => fetch('http://localhost:5000/services')
       },
       {
         path: "/booked-services",
-        element: <PrivateRoutes><BookedServices></BookedServices> </PrivateRoutes>
+        element: <PrivateRoutes><BookedServices></BookedServices> </PrivateRoutes>,
+        loader: () => fetch("http://localhost:5000/book-service")
       },
       {
         path: "/service-to-do",
-        element: <PrivateRoutes> <ServiceToDo></ServiceToDo> </PrivateRoutes>
+        element: <PrivateRoutes> <ServiceToDo></ServiceToDo> </PrivateRoutes>,
+        loader: () => fetch("http://localhost:5000/book-service")
       },
       {
         path: "/services/:id",
