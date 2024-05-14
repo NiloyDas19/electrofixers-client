@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import DocumentTitle from '../../../documentTitle/DocumentTitle';
 import { AuthContext } from '../../../providers/AuthProviders';
 import { useLoaderData } from 'react-router-dom';
+import ServiceToDOCard from './ServiceToDoCard';
 
 const ServiceToDo = () => {
     DocumentTitle('Service To Do');
@@ -15,11 +16,15 @@ const ServiceToDo = () => {
     },[]);
     
     return (
-        <div>
-            This is Service to Do.
-            {
-                myService.length
-            }
+        <div className='space-y-10 w-[95%] mx-auto mt-10'>
+            <div>
+                <h2 className='text-center text-4xl font-bold'>Service To Do Pages</h2>
+            </div>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+                {
+                    myService.map(service => <ServiceToDOCard key={service._id} service={service}></ServiceToDOCard> )
+                }
+            </div>
         </div>
     );
 };
