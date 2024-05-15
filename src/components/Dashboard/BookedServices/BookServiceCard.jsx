@@ -8,7 +8,7 @@ const BookServiceCard = ({ service }) => {
     return (
         <div className="flex flex-col space-y-5 border-2 rounded-3xl border-orange-100">
             <div className="rounded-t-3xl">
-                <img src={serviceImage} className="rounded-t-3xl" alt="" />
+                <img src={serviceImage} className="rounded-t-3xl w-full" alt="" />
             </div>
             <div className="flex-grow px-6 text-center">
                 <h2 className="text-3xl font-bold">{serviceName}</h2>
