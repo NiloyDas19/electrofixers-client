@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
-import { IoPersonCircleSharp } from 'react-icons/io5';
-import { MdOutlineEmail } from 'react-icons/md';
 import { SlCalender } from 'react-icons/sl';
 
 const ServiceToDOCard = ({ service }) => {
-    const { _id, serviceImage, serviceName, providerEmail, providerName, serviceDate, instructions, price, status } = service;
+    const { _id, serviceImage, serviceName, providerEmail, providerName, userName, userEmail, serviceDate, instructions, price, status } = service;
     const handleStatus = (event) => {
         console.log(event.target.value);
         const newStatus = event.target.value;
@@ -37,15 +35,21 @@ const ServiceToDOCard = ({ service }) => {
                 </div>
                 <p className="text-xl font-bold">${price}</p>
             </div>
-            <div className="flex flex-col md:flex-row justify-between px-6 items-center">
-                <div className="flex items-center gap-2 justify-center">
-                    <IoPersonCircleSharp className='h-8 w-8'/>
-                    <h2 className="font-semibold text-xl">{providerName}</h2>
-                </div>
-                <div className="flex items-center gap-2 justify-center">
-                    <MdOutlineEmail className='h-6 w-6'/>
-                    <h2 className="font-semibold text-xl">{providerEmail}</h2>
-                </div>
+            <div className="flex justify-between px-6 flex-col md:flex-row">
+                <p>User Name</p>
+                <h2 className="font-semibold text-xl">{userName}</h2>
+            </div>
+            <div className="flex justify-between px-6 flex-col md:flex-row">
+                <p>User Email</p>
+                <h2 className="font-semibold text-xl">{userEmail}</h2>
+            </div>
+            <div className="flex justify-between px-6 flex-col md:flex-row">
+                <p>Provider Name</p>
+                <h2 className="font-semibold text-xl">{providerName}</h2>
+            </div>
+            <div className="flex justify-between px-6 flex-col md:flex-row">
+                <p>Provider Email</p>
+                <h2 className="font-semibold text-xl">{providerEmail}</h2>
             </div>
             <div className="flex items-center justify-center pb-6">
                 <div>

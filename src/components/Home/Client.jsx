@@ -2,6 +2,8 @@
 import { PropTypes } from 'prop-types';
 import { AuthContext } from '../../providers/AuthProviders';
 import { useContext } from 'react';
+import { RiStarSLine } from "react-icons/ri";
+
 
 const Client = ({client}) => {
     const {name, rating, review, image_url} = client;
@@ -16,8 +18,9 @@ const Client = ({client}) => {
                     <img src={image_url} className='w-14 h-14 rounded-full' alt="" />
                     <h2 className='font-bold'>{name}</h2>
                 </div>
-                <div>
-                    <p>{rating}</p>
+                <div className='flex items-center justify-center gap-1'>
+                    <p className='font-bold'>{rating}</p>
+                    <RiStarSLine className='w-6 h-6'/>
                 </div>
             </div>
         </div>
