@@ -1,0 +1,4 @@
+.active {
+    background-color: #ff6600; /* Active link background color */
+    color: #fff; /* Active link text color */
+}

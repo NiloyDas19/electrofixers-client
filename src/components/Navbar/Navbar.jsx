@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProviders";
 import logo from "../../assets/logo.png"
 import { Tooltip } from 'react-tooltip';
@@ -41,16 +41,16 @@ const Navbar = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </label>
         </li>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/all-services">Services</Link></li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/all-services">Services</NavLink></li>
         {  user && <li>
                 <details>
                     <summary>Dashboard</summary>
                     <ul className={`${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"}`}>
-                        <li><Link to="/add-service">Add Service</Link></li>
-                        <li><Link to="/manage-service">Manage Service</Link></li>
-                        <li><Link to="/booked-services">Booked Services</Link></li>
-                        <li><Link to="/service-to-do">Service To Do</Link></li>
+                        <li><NavLink to="/add-service">Add Service</NavLink></li>
+                        <li><NavLink to="/manage-service">Manage Service</NavLink></li>
+                        <li><NavLink to="/booked-services">Booked Services</NavLink></li>
+                        <li><NavLink to="/service-to-do">Service To Do</NavLink></li>
                     </ul>
                 </details>
             </li>
