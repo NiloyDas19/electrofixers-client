@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/services')
+        loader: () => fetch('https://elctrofixers-client-side.vercel.app/services')
 
       },
       {
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       {
         path: "/all-services",
         element: <AllServices></AllServices>,
-        loader : () => fetch('http://localhost:5000/services')
+        loader: () => fetch('https://elctrofixers-client-side.vercel.app/services')
       },
       {
         path: "/add-service",
@@ -53,32 +53,32 @@ const router = createBrowserRouter([
       {
         path: "/manage-service",
         element: <PrivateRoutes><ManageService></ManageService></PrivateRoutes>,
-        loader: () => fetch('http://localhost:5000/services')
+        loader: () => fetch('https://elctrofixers-client-side.vercel.app/services')
       },
       {
         path: "/booked-services",
         element: <PrivateRoutes><BookedServices></BookedServices> </PrivateRoutes>,
-        loader: () => fetch("http://localhost:5000/book-service")
+        loader: () => fetch("https://elctrofixers-client-side.vercel.app/book-service")
       },
       {
         path: "/service-to-do",
         element: <PrivateRoutes> <ServiceToDo></ServiceToDo> </PrivateRoutes>,
-        loader: () => fetch("http://localhost:5000/book-service")
+        loader: () => fetch("https://elctrofixers-client-side.vercel.app/book-service")
       },
       {
         path: "/services/:id",
         element: <PrivateRoutes> <ServiceDetails></ServiceDetails> </PrivateRoutes>,
-        loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+        loader: ({ params }) => fetch(`https://elctrofixers-client-side.vercel.app/services/${params.id}`)
       },
       {
         path: "/book-now/:id",
         element: <PrivateRoutes><BookNow></BookNow></PrivateRoutes>,
-        loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+        loader: ({ params }) => fetch(`https://elctrofixers-client-side.vercel.app/services/${params.id}`)
       },
       {
         path: "/update-service/:id",
         element: <PrivateRoutes><UpdateService></UpdateService></PrivateRoutes>,
-        loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+        loader: ({ params }) => fetch(`https://elctrofixers-client-side.vercel.app/services/${params.id}`)
       }
     ]
   },

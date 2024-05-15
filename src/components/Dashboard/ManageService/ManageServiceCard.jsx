@@ -18,7 +18,7 @@ const ManageServiceCard = ({ service }) => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    fetch(`http://localhost:5000/service/${_id}`, {
+                    fetch(`https://elctrofixers-client-side.vercel.app/service/${_id}`, {
                         method: "DELETE",
                     })
                         .then(res => res.json())

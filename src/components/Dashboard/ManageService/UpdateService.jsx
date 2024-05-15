@@ -28,7 +28,7 @@ const UpdateService = () => {
 
         console.log(updateService);
 
-        fetch(`http://localhost:5000/update-service/${_id}`, {
+        fetch(`https://elctrofixers-client-side.vercel.app/update-service/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'

@@ -30,7 +30,7 @@ const BookNow = () => {
 
         console.log(newBookedService);
 
-        fetch('http://localhost:5000/book-service', {
+        fetch('https://elctrofixers-client-side.vercel.app/book-service', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

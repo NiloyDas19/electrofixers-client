@@ -9,7 +9,7 @@ const ServiceToDOCard = ({ service }) => {
         console.log(event.target.value);
         const newStatus = event.target.value;
         const updateService = {newStatus};
-        fetch(`http://localhost:5000/update-booked-service/${_id}`, {
+        fetch(`https://elctrofixers-client-side.vercel.app/update-booked-service/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
