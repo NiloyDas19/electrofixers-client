@@ -2,13 +2,14 @@ import { useContext } from 'react';
 import DocumentTitle from '../../../documentTitle/DocumentTitle';
 import { AuthContext } from '../../../providers/AuthProviders';
 import swal from 'sweetalert';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const UpdateService = () => {
     DocumentTitle('Update Service');
     const { isDark, user } = useContext(AuthContext);
     const service = useLoaderData();
     const {_id, imageUrl, serviceName, description, providerImageUrl, providerName, price, serviceArea } = service;
+    const navigate = useNavigate();
 
 
     const handleAddService = event => {
@@ -43,6 +44,7 @@ const UpdateService = () => {
                         icon: "success",
                         button: "ok!",
                     });
+                    navigate('/manage-service');
                 }
                 
             })

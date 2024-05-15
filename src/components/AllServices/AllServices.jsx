@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import DocumentTitle from './../../documentTitle/DocumentTitle';
 import ServiceCard from './ServiceCard';
-import { IoIosSearch } from "react-icons/io";
 
 
 const AllServices = () => {
@@ -39,7 +38,7 @@ const AllServices = () => {
     );
 
     // Calculate pagination
-    const servicesPerPage = 5;
+    const servicesPerPage = 6;
     const indexOfLastService = currentPage * servicesPerPage;
     const indexOfFirstService = indexOfLastService - servicesPerPage;
     const currentServices = filteredServices.slice(indexOfFirstService, indexOfLastService);

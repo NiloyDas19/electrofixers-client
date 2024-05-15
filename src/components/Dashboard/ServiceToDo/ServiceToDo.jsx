@@ -16,9 +16,14 @@ const ServiceToDo = () => {
     },[]);
     
     return (
-        <div className='space-y-10 w-[95%] mx-auto mt-10'>
+        <div className='space-y-10 w-[95%] mx-auto mt-10 min-h-screen'>
             <div>
-                <h2 className='text-center text-4xl font-bold'>Service To Do Pages</h2>
+                {
+                    myService.length > 0 ?
+                    <h2 className='text-center text-4xl font-bold'>Service To Do Page</h2>
+                    :
+                    <h2 className='text-center text-4xl font-bold'>You haven't any service to do</h2>
+                }
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                 {
@@ -26,7 +31,7 @@ const ServiceToDo = () => {
                 }
             </div>
         </div>
-    );
+    );  
 };
 
 export default ServiceToDo;

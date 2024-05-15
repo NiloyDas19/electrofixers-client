@@ -16,9 +16,15 @@ const BookedServices = () => {
     },[]);
 
     return (
-        <div className='w-[95%] mx-auto space-y-10 mt-10'>
+        <div className='w-[95%] mx-auto space-y-10 mt-10 min-h-screen'>
             <div>
-                <h2 className='text-center text-4xl font-bold'>Here are all the service that you purchased</h2>
+                {
+                    bookedServices.length > 0 ?
+                    <h2 className='text-center text-4xl font-bold'>Here are all the service that you purchased</h2>
+                    :
+                    <h2 className='text-center text-4xl font-bold'>You haven't purchased any service</h2>
+                    
+                }
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                 {
