@@ -10,7 +10,8 @@ const Footer = () => {
             <aside>
                 <img src={logo} alt="" className="w-16 h-12"/>
                 <p className="text-3xl font-bold">ELCTRO<span className="text-orange-500">FIXERS</span></p>
-                <p>Providing reliable tech since 2024</p>
+                <p>Providing reliable service since 2024</p>
+                <p>Copyright © 2024 - All right reserved</p>
             </aside>
             <nav>
                 <h6 className="footer-title">Social</h6>
