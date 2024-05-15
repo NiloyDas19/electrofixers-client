@@ -1,0 +1,33 @@
+[
+    {
+      "name": "John Doe",
+      "review": "Exceptional service! John was professional, knowledgeable, and fixed my laptop in no time. Highly recommend!",
+      "rating": 5,
+      "image_url": "https://i.ibb.co/1R5v6pL/client3.jpg"
+    },
+    {
+      "name": "Rahul",
+      "review": "Rahul provided excellent smartphone repair service. My phone is working perfectly now. Thank you!",
+      "rating": 4,
+      "image_url": "https://i.ibb.co/kqcnm3F/client2.jpg"
+    },
+    {
+      "name": "Daniel",
+      "review": "Daniel fixed my printer quickly and efficiently. Great service and friendly demeanor. Will definitely use again!",
+      "rating": 5,
+      "image_url": "https://i.ibb.co/DGN4pyn/client1.jpg"
+    },
+    {
+      "name": "Emily Smith",
+      "review": "Emily repaired my gaming console with expertise. Smooth process from start to finish. Highly recommended!",
+      "rating": 4,
+      "image_url": "https://i.ibb.co/0201CCZ/client7.jpg"
+    },
+    {
+      "name": "Sara Brown",
+      "review": "Sara was amazing! She fixed my tablet quickly and kept me informed throughout the process. Very satisfied!",
+      "rating": 5,
+      "image_url": "https://i.ibb.co/gZLDM4J/client6.jpg"
+    }
+  ]
+  

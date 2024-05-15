@@ -2,10 +2,19 @@ import Banner from "./Banner/Banner";
 import DocumentTitle from './../../documentTitle/DocumentTitle';
 import { Link, useLoaderData } from "react-router-dom";
 import PopularServicesCard from "./PopularServicesCard";
+import { useEffect, useState } from "react";
+import Client from "./Client";
 
 const Home = () => {
     DocumentTitle('Home');
     const services = useLoaderData();
+    const [clients, setClients] = useState([]);
+
+    useEffect(() => {
+        fetch('review.json')
+        .then(res => res.json())
+        .then(data => setClients(data));
+    },[]);
 
     return (
         <div className="space-y-10">
@@ -26,6 +35,20 @@ const Home = () => {
                     <Link to={`/all-services`}><button className="btn bg-orange-500 text-white font-bold">View All Posts</button></Link>
                 </div>
             </div>
+
+            <div className="w-[95%] mx-auto space-y-10">
+                <div className="text-center space-y-2">
+                    <h2 className="text-3xl font-bold">Clients Review</h2>
+                    <p>The client review section showcases the experiences and feedback of customers who have used our services. Here, you can find testimonials from satisfied clients who have benefited from our expertise and professionalism. These reviews provide valuable insights into the quality of our services and help prospective clients make informed decisions. Whether it's smartphone repairs, laptop fixes, or printer troubleshooting, our clients' testimonials highlight our commitment to excellence and customer satisfaction.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {
+                        clients.map((client, index) => <Client key={index} client={client}></Client>)
+                    }
+                </div>
+            </div>
+
+
 
             {/* Frequently Asked Question */}
             <div className="w-[95%] mx-auto space-y-10">

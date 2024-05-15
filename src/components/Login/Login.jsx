@@ -69,7 +69,7 @@ const Login = () => {
 
 
     return (
-        <div className="hero min-h-screen mx-auto" data-aos="zoom-in-down">
+        <div className="hero min-h-screen mx-auto">
             <div className={`card w-full md:w-1/2 max-w-sm md:max-w-xl shadow-2xl  p-10 ${isDark === 'dark' ? "bg-[#28185d] shadow-orange-200" : "bg-base-100"}`}>
                 <div className="text-center mt-5">
                     <h2 className="text-2xl md:text-4xl text-blue-500 font-bold">Login Here</h2>
