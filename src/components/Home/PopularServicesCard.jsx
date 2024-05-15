@@ -10,7 +10,7 @@ const PopularServicesCard = ({service}) => {
             </div>
             <div className="flex-grow flex justify-between px-6">
                 <h2 className="text-3xl font-bold">{serviceName}</h2>
-                <p className="text-3xl">{price}</p>
+                <p className="text-3xl font-semibold">${price}</p>
             </div>
             <div className="px-6">
                 <p>{description}</p>

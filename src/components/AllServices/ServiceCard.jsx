@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import { TiLocationOutline } from "react-icons/ti";
+
 
 const ServiceCard = ({service}) => {
     const {_id, imageUrl, serviceName, description, providerImageUrl, providerName, price, serviceArea } = service;
@@ -12,9 +14,12 @@ const ServiceCard = ({service}) => {
                 <h2 className="text-3xl font-bold">{serviceName}</h2>
                 <p>{description}</p>
             </div>
-            <div className="px-6 flex justify-between">
-                <p className="text-3xl">{serviceArea}</p>
-                <p className="text-3xl">{price}</p>
+            <div className="px-6 flex justify-between items-center">
+                <div className="flex items-center">
+                    <TiLocationOutline className="w-8 h-8"/>
+                    <p className="text-xl font-bold">{serviceArea}</p>
+                </div>
+                <p className="text-xl font-bold">${price}</p>
             </div>
             <div className="flex justify-between px-6 pb-6">
                 <div className="flex items-center gap-2">

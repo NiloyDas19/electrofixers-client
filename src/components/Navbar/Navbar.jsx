@@ -86,7 +86,7 @@ const Navbar = () => {
                 </div>
                 <Link to="/" className="flex justify-center items-center cursor-pointer">
                     <img src={logo} alt="" className="w-16 h-12" />
-                    <a className="text-3xl font-semibold">ELECTRO<span className="text-orange-500">FIXERS</span></a>
+                    <a className="text-2xl md:text-3xl font-semibold">ELECTRO<span className="text-orange-500">FIXERS</span></a>
                 </Link>
             </div>
             <div className="justify-end hidden lg:flex">

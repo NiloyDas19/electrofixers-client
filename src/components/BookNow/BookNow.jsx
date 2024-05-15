@@ -2,13 +2,14 @@ import { useContext, useRef } from 'react';
 import DocumentTitle from '../../documentTitle/DocumentTitle';
 import { AuthContext } from '../../providers/AuthProviders';
 import swal from 'sweetalert';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const BookNow = () => {
     DocumentTitle('Book Now');
     const { isDark, user } = useContext(AuthContext);
     const service = useLoaderData();
     const serviceDateRef = useRef(null); // Ref for the date input field
+    const navigate = useNavigate();
 
     const handleBookingService = event => {
         event.preventDefault();
@@ -46,6 +47,7 @@ const BookNow = () => {
                         button: "ok!",
                     });
                     form.reset();
+                    navigate('/all-services')
                 }
             })
     }
