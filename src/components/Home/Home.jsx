@@ -2,19 +2,21 @@ import Banner from "./Banner/Banner";
 import DocumentTitle from './../../documentTitle/DocumentTitle';
 import { Link, useLoaderData } from "react-router-dom";
 import PopularServicesCard from "./PopularServicesCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Client from "./Client";
+import { AuthContext } from "../../providers/AuthProviders";
 
 const Home = () => {
     DocumentTitle('Home');
     const services = useLoaderData();
     const [clients, setClients] = useState([]);
+    const {isDark} = useContext(AuthContext);
 
     useEffect(() => {
         fetch('review.json')
-        .then(res => res.json())
-        .then(data => setClients(data));
-    },[]);
+            .then(res => res.json())
+            .then(data => setClients(data));
+    }, []);
 
     return (
         <div className="space-y-10">
@@ -104,6 +106,26 @@ const Home = () => {
                             <p>Yes, the website is designed to be responsive, ensuring a seamless user experience across various devices and screen sizes. Whether users access the website from a desktop, tablet, or mobile device, they can easily navigate and interact with the content.</p>
                         </div>
                     </div>
+                </div>
+            </div>
+
+
+            {/* About US Section */}
+            <div className={`w-[95%] mx-auto border-2 rounded-2xl p-5 shadow-xl ${isDark == 'dark' && 'shadow-orange-200'}`}>
+                <div className="text-center space-y-2">
+                    <h2 className="text-3xl font-bold">About Us</h2>
+                    <p>Welcome to ElectroFixers, your premier destination for top-quality electronic repair services.
+
+                        At ElectroFixers, we specialize in providing expert repair solutions for a wide range of electronic devices, ensuring that your gadgets are back up and running in no time. Our team of skilled technicians is dedicated to delivering prompt and reliable repairs for smartphones, laptops, tablets, cameras, gaming consoles, and more.
+
+                        With a focus on excellence and customer satisfaction, we pride ourselves on our commitment to providing exceptional service at every step of the repair process. From accurate diagnostics to meticulous repairs, we handle each job with precision and care to ensure the best possible outcome for our customers.
+
+                        What sets ElectroFixers apart is our unwavering dedication to quality and convenience. We understand the importance of your electronic devices in your daily life, which is why we strive to offer fast turnaround times without compromising on the quality of our work. Our transparent pricing and upfront communication ensure that you always know what to expect when you choose ElectroFixers for your repair needs.
+
+                        At ElectroFixers, we believe in going above and beyond to exceed our customers' expectations. With our combination of expertise, professionalism, and personalized service, we aim to provide an unparalleled repair experience that leaves our customers satisfied and their devices functioning like new.
+
+                        Thank you for choosing ElectroFixers for all your electronic repair needs. We look forward to serving you and earning your trust as your go-to repair service provider.
+                    </p>
                 </div>
             </div>
         </div>
