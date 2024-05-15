@@ -17,7 +17,6 @@ const ServiceToDOCard = ({ service }) => {
             .then(data => {
                 console.log(data);
             })
-
     }
     return (
         <div className="flex flex-col space-y-5 border-2 rounded-3xl border-orange-100">
