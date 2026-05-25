@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProviders";
 import logo from "../../assets/logo.png"
 import { Tooltip } from 'react-tooltip';
-
+import { HiSun, HiMoon, HiMenu } from "react-icons/hi";
 
 const Navbar = () => {
     const { user, logOut, isDark, setIsDark, loading } = useContext(AuthContext);
@@ -12,18 +12,7 @@ const Navbar = () => {
         localStorage.setItem('theme', isDark);
     }, [isDark]);
 
-    if (loading) {
-        return (
-            <div className="text-center">
-                <span className="loading loading-spinner loading-sm mx-auto"></span>
-                <span className="loading loading-spinner loading-md mx-auto"></span>
-                <span className="loading loading-spinner loading-lg mx-auto"></span>
-            </div>
-        );
-    }
-
     const handleLogOut = () => {
-        console.log(user);
         logOut()
             .then(() => {
                 console.log("Log Out Successful");
@@ -35,72 +24,140 @@ const Navbar = () => {
 
     const navLinks = <>
         <li>
-            <label className="flex cursor-pointer gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5" /><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" /></svg>
-                <input type="checkbox" value="synthwave" className="toggle theme-controller w-12" onChange={() => { (isDark === 'dark') ? setIsDark('light') : setIsDark('dark') }} checked={isDark === 'dark'} />
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            </label>
+            <NavLink 
+                to="/" 
+                className={({ isActive }) => 
+                    `px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:text-orange-500 hover:bg-orange-500/5 ${isActive ? "text-orange-500 bg-orange-500/10 font-semibold" : "text-slate-600 dark:text-slate-300"}`
+                }
+            >
+                Home
+            </NavLink>
         </li>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/all-services">Services</NavLink></li>
-        {  user && <li>
-                <details>
-                    <summary>Dashboard</summary>
-                    <ul className={`${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"}`}>
-                        <li><NavLink to="/add-service">Add Service</NavLink></li>
-                        <li><NavLink to="/manage-service">Manage Service</NavLink></li>
-                        <li><NavLink to="/booked-services">Booked Services</NavLink></li>
-                        <li><NavLink to="/service-to-do">Service To Do</NavLink></li>
+        <li>
+            <NavLink 
+                to="/all-services" 
+                className={({ isActive }) => 
+                    `px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:text-orange-500 hover:bg-orange-500/5 ${isActive ? "text-orange-500 bg-orange-500/10 font-semibold" : "text-slate-600 dark:text-slate-300"}`
+                }
+            >
+                Services
+            </NavLink>
+        </li>
+        {user && (
+            <li className="relative group">
+                <details className="dropdown dropdown-end">
+                    <summary className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:text-orange-500 hover:bg-orange-500/5 cursor-pointer list-none text-slate-600 dark:text-slate-300 flex items-center gap-1 select-none">
+                        Dashboard
+                        <svg className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </summary>
+                    <ul className="dropdown-content menu p-2 shadow-2xl bg-white dark:bg-[#130E26] rounded-xl w-52 mt-2 border border-slate-100 dark:border-white/10 text-slate-700 dark:text-slate-200 z-50">
+                        <li><NavLink to="/add-service" className="hover:bg-orange-500/10 hover:text-orange-500 rounded-lg">Add Service</NavLink></li>
+                        <li><NavLink to="/manage-service" className="hover:bg-orange-500/10 hover:text-orange-500 rounded-lg">Manage Service</NavLink></li>
+                        <li><NavLink to="/booked-services" className="hover:bg-orange-500/10 hover:text-orange-500 rounded-lg">Booked Services</NavLink></li>
+                        <li><NavLink to="/service-to-do" className="hover:bg-orange-500/10 hover:text-orange-500 rounded-lg">Service To Do</NavLink></li>
                     </ul>
                 </details>
             </li>
-        }
-        {
-            user ?
-                <>
-                    <li className="space-y-2">
-                        <div className="avatar" data-tooltip-id="my-tooltip">
-                            <div className="w-8 md:w-11 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                <img src={user.photoURL ? user.photoURL : "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} />
-                            </div>
-                        </div>
-                    </li>
-                    <li onClick={handleLogOut}><Link to="/" className="btn btn-outline bg-orange-500 px-6 font-bold" >Logout</Link></li>
-                </>
-                :
-                <li><Link to="/login" className="btn btn-outline bg-orange-500 px-6 font-bold">Login</Link></li>
-        }
+        )}
     </>
+
     return (
-        <div className={`flex justify-between p-2 ${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"} top-0 z-10 font-bold sticky border-b-2 border-orange-500`}>
-            <div className="justify-start flex items-center ">
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        <header className="sticky top-0 z-50 transition-all duration-300 backdrop-blur-md bg-white/70 dark:bg-[#0B081A]/75 border-b border-slate-200/50 dark:border-white/5 shadow-sm">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-20">
+                    
+                    {/* Brand Logo & Name */}
+                    <div className="flex items-center gap-3">
+                        {/* Mobile Menu Dropdown */}
+                        <div className="dropdown lg:hidden">
+                            <div tabIndex={0} role="button" className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-all">
+                                <HiMenu className="w-6 h-6" />
+                            </div>
+                            <ul tabIndex={0} className="dropdown-content menu menu-sm p-3 mt-3 shadow-2xl bg-white dark:bg-[#130E26] border border-slate-100 dark:border-white/10 rounded-2xl w-56 space-y-2 z-50 text-slate-800 dark:text-slate-200">
+                                {navLinks}
+                                <div className="border-t border-slate-100 dark:border-white/10 my-2"></div>
+                                <div className="flex items-center justify-between px-3 py-1">
+                                    <span className="text-xs text-slate-400">Theme</span>
+                                    <button 
+                                        onClick={() => setIsDark(isDark === 'dark' ? 'light' : 'dark')}
+                                        className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-orange-500 hover:scale-105 transition-all"
+                                    >
+                                        {isDark === 'dark' ? <HiSun className="w-5 h-5" /> : <HiMoon className="w-5 h-5" />}
+                                    </button>
+                                </div>
+                            </ul>
+                        </div>
+                        
+                        <Link to="/" className="flex items-center gap-2 group">
+                            <img src={logo} alt="ElectroFixers Logo" className="w-12 h-10 object-contain group-hover:scale-105 transition-all duration-300" />
+                            <span className="text-xl md:text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">
+                                ELECTRO<span className="text-orange-500 group-hover:text-orange-600 transition-colors">FIXERS</span>
+                            </span>
+                        </Link>
                     </div>
-                    <ul tabIndex={0} className={`menu menu-sm dropdown-content mt-3 z-[2] p-2 shadow  ${isDark === 'dark' ? "bg-[#150d32]" : "bg-white"} rounded-box w-52 space-y-2`}>
-                        {
-                            navLinks
-                        }
-                    </ul>
+
+                    {/* Desktop Navigation Links */}
+                    <nav className="hidden lg:flex items-center gap-2">
+                        <ul className="menu menu-horizontal items-center gap-1 px-1">
+                            {navLinks}
+                        </ul>
+                    </nav>
+
+                    {/* Right Action Area: Theme Toggle + Auth Status */}
+                    <div className="flex items-center gap-4">
+                        {/* Theme Toggle Button (Desktop) */}
+                        <button 
+                            onClick={() => setIsDark(isDark === 'dark' ? 'light' : 'dark')}
+                            className="hidden lg:flex p-2.5 rounded-xl border border-slate-200/60 dark:border-white/10 hover:border-orange-500/50 dark:hover:border-orange-500/50 hover:bg-orange-500/5 dark:hover:bg-orange-500/5 text-slate-600 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-500 transition-all duration-300 hover:scale-105"
+                            aria-label="Toggle theme"
+                        >
+                            {isDark === 'dark' ? <HiSun className="w-5 h-5" /> : <HiMoon className="w-5 h-5" />}
+                        </button>
+
+                        <div className="flex items-center gap-3">
+                            {loading ? (
+                                <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-white/5 animate-pulse flex items-center justify-center">
+                                    <span className="w-4 h-4 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"></span>
+                                </div>
+                            ) : user ? (
+                                <>
+                                    {/* User Avatar */}
+                                    <div className="avatar cursor-pointer" data-tooltip-id="user-tooltip">
+                                        <div className="w-10 h-10 rounded-full border-2 border-orange-500/60 hover:border-orange-500 ring-2 ring-offset-2 ring-offset-white dark:ring-offset-[#0B081A] ring-slate-100 dark:ring-white/10 transition-all hover:scale-105">
+                                            <img src={user.photoURL || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} alt={user.displayName} />
+                                        </div>
+                                    </div>
+                                    {/* Logout Button */}
+                                    <button 
+                                        onClick={handleLogOut} 
+                                        className="btn btn-sm md:btn-md bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold border-none rounded-xl px-5 py-2 shadow-lg shadow-orange-500/20 hover:scale-[1.03] active:scale-[0.98] transition-all"
+                                    >
+                                        Logout
+                                    </button>
+                                </>
+                            ) : (
+                                <Link 
+                                    to="/login" 
+                                    className="btn btn-sm md:btn-md bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold border-none rounded-xl px-5 py-2 shadow-lg shadow-orange-500/20 hover:scale-[1.03] active:scale-[0.98] transition-all"
+                                >
+                                    Login
+                                </Link>
+                            )}
+                        </div>
+                    </div>
+
                 </div>
-                <Link to="/" className="flex justify-center items-center cursor-pointer">
-                    <img src={logo} alt="" className="w-16 h-12" />
-                    <a className="text-2xl md:text-3xl font-semibold">ELECTRO<span className="text-orange-500">FIXERS</span></a>
-                </Link>
             </div>
-            <div className="justify-end hidden lg:flex">
-                <ul className={`menu menu-horizontal px-1 flex justify-center z-10 items-center`}>
-                    {
-                        navLinks
-                    }
-                </ul>
-            </div>
+            
             <Tooltip
-                id="my-tooltip"
-                content={user?.displayName}
+                id="user-tooltip"
+                content={user?.displayName || "Profile"}
+                place="bottom"
+                className="z-50 !bg-slate-900 !text-white !rounded-lg !px-3 !py-1 text-xs shadow-lg"
             />
-        </div>
+        </header>
     );
 };
 
