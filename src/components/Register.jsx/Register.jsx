@@ -8,7 +8,6 @@ import auth from "../../firebase/firebase.config";
 import swal from 'sweetalert';
 import DocumentTitle from "../../documentTitle/DocumentTitle";
 
-
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { createUserWithEmailPassword, createWithGoogle, setLoading, isDark } = useContext(AuthContext);
@@ -17,7 +16,6 @@ const Register = () => {
     DocumentTitle('Register');
     const location = useLocation();
 
-
     const handleRegister = (e) => {
         e.preventDefault();
 
@@ -25,13 +23,12 @@ const Register = () => {
         const email = e.target.email.value;
         const photoUrl = e.target.photoUrl.value;
         const password = e.target.password.value;
-        console.log(name, email, photoUrl, password);
 
         if (!/^(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password)) {
             swal({
                 icon: "error",
-                title: "Oops...",
-                text: "Password should be at least 6 characters. Must have an Uppercase letter and a Lowercase letter",
+                title: "Weak Password",
+                text: "Password should be at least 6 characters. Must contain both Uppercase and Lowercase letters.",
             });
             return;
         }
@@ -39,24 +36,20 @@ const Register = () => {
         createUserWithEmailPassword(email, password)
             .then(result => {
                 console.log("registration Successful", result.user);
-                // notify();
                 updateProfile(auth.currentUser, {
                     displayName: name, photoURL: photoUrl
                 }).then(() => {
                     // Profile updated!
-                    // ...
                 }).catch((error) => {
-                    // An error occurred
-                    // ...
                     console.log(error.message);
                 });
                 result.user.displayName = name;
                 result.user.photoURL = photoUrl;
                 swal({
                     icon: "success",
-                    title: "Registration Successful!",
-                    showConfirmButton: false,
-                    timer: 1500
+                    title: "Welcome aboard!",
+                    text: "Your Account Registration was Successful!",
+                    button: "Proceed",
                 });
                 navigate(location?.state ? location?.state : "/");
                 e.target.reset();
@@ -68,7 +61,6 @@ const Register = () => {
                     text: error.message,
                 });
                 setLoading(false);
-                console.log(error.message);
             });
     }
 
@@ -78,9 +70,9 @@ const Register = () => {
                 console.log(result.user);
                 swal({
                     icon: "success",
-                    title: "Registration Successful!",
-                    showConfirmButton: false,
-                    timer: 1500
+                    title: "Welcome aboard!",
+                    text: "Google Account Registration Successful!",
+                    button: "Proceed",
                 });
                 navigate(location?.state ? location?.state : "/");
             })
@@ -91,63 +83,132 @@ const Register = () => {
                     text: error.message,
                 });
                 setLoading(false);
-                console.log(error.message);
             })
     }
 
-
-
     return (
-        <div className="hero min-h-screen mx-auto pt-20">
-            <div className={`card w-full md:w-1/2 max-w-sm md:max-w-xl shadow-2xl  p-10 ${isDark === 'dark' ? "bg-[#28185d] shadow-orange-200" : "bg-base-100"}`}>
-                <div className="text-center mt-5">
-                    <h2 className="text-2xl md:text-4xl text-blue-500 font-bold">Register Here</h2>
+        <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+            <div className="w-full max-w-lg backdrop-blur-md bg-white/85 dark:bg-[#130E26]/80 border border-slate-200 dark:border-white/5 rounded-3xl p-8 md:p-12 shadow-2xl space-y-8 hover:border-orange-500/10 transition-all duration-300">
+                
+                {/* Header */}
+                <div className="text-center space-y-2">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-xs font-semibold uppercase tracking-wider">
+                        📝 Joined Members
+                    </span>
+                    <h2 className="text-3xl font-black text-slate-800 dark:text-slate-100">
+                        Create an <span className="text-gradient-orange">Account</span>
+                    </h2>
+                    <p className="text-xs text-slate-400">
+                        Register as a diagnostic provider or checkout customer to unlock platform tools.
+                    </p>
                 </div>
-                <form className="w-full" onSubmit={handleRegister}>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="">Name</span>
+
+                {/* Form */}
+                <form className="space-y-4" onSubmit={handleRegister}>
+                    
+                    {/* Name Field */}
+                    <div className="space-y-1">
+                        <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                            Full Name
                         </label>
-                        <input type="text" placeholder="name" name="name" className={`${isDark === 'dark' ? "bg-[#351f7e] border-blue hover:border-black" : "bg-slate-50"} input input-bordered w-full`} required />
+                        <input 
+                            type="text" 
+                            placeholder="John Doe" 
+                            name="name" 
+                            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
+                            required 
+                        />
                     </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="">Email</span>
+
+                    {/* Email Field */}
+                    <div className="space-y-1">
+                        <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                            Email Address
                         </label>
-                        <input type="email" placeholder="email" name="email" className={`${isDark === 'dark' ? "bg-[#351f7e] border-blue hover:border-black" : "bg-slate-50"} input input-bordered w-full`} required />
+                        <input 
+                            type="email" 
+                            placeholder="johndoe@example.com" 
+                            name="email" 
+                            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
+                            required 
+                        />
                     </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="">Photo URL</span>
+
+                    {/* Photo URL Field */}
+                    <div className="space-y-1">
+                        <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                            Profile Photo URL
                         </label>
-                        <input type="text" placeholder="Photo URL" name="photoUrl" className={`${isDark === 'dark' ? "bg-[#351f7e] border-blue hover:border-black" : "bg-slate-50"} input input-bordered w-full`} required />
+                        <input 
+                            type="text" 
+                            placeholder="Paste photo link..." 
+                            name="photoUrl" 
+                            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
+                            required 
+                        />
                     </div>
-                    <div className="form-control relative">
-                        <label className="label">
-                            <span className="">Password</span>
-                            <span className="absolute bottom-4 right-3"
-                                onClick={() => setShowPassword(!showPassword)}>
-                                {
-                                    showPassword ?
-                                        <FaEye></FaEye>
-                                        : <FaEyeSlash></FaEyeSlash>
-                                }
-                            </span>
+
+                    {/* Password Field */}
+                    <div className="space-y-1 relative">
+                        <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                            Password
                         </label>
-                        <input type={showPassword ? "text" : "password"} placeholder="password" name="password" className={`${isDark === 'dark' ? "bg-[#351f7e] border-blue hover:border-black" : "bg-slate-50"} input input-bordered w-full`} required />
+                        <div className="relative">
+                            <input 
+                                type={showPassword ? "text" : "password"} 
+                                placeholder="••••••••" 
+                                name="password" 
+                                className="w-full px-4 py-2.5 pr-12 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
+                                required 
+                            />
+                            <button 
+                                type="button"
+                                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-orange-500 transition-colors"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <FaEye className="w-4 h-4" /> : <FaEyeSlash className="w-4 h-4" />}
+                            </button>
+                        </div>
                     </div>
-                    <div className="form-control mt-6">
-                        <button className="btn btn-primary">Register</button>
+
+                    {/* Submit Registration Button */}
+                    <div className="pt-4">
+                        <button 
+                            type="submit" 
+                            className="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-extrabold rounded-2xl shadow-lg shadow-orange-500/25 hover:scale-[1.01] active:scale-[0.99] transition-all text-sm uppercase tracking-wider"
+                        >
+                            Create Account
+                        </button>
                     </div>
+
                 </form>
-                <div className="flex mt-5 justify-center items-center gap-1">
-                    <div className="h-1 w-full bg-orange-500"></div>
-                    <div className="text-xl font-bold">Social</div>
-                    <div className="h-1 w-full bg-orange-500"></div>
+
+                {/* Divider */}
+                <div className="flex items-center justify-center gap-4 text-xs font-bold uppercase tracking-wider text-slate-400">
+                    <div className="h-[1px] flex-grow bg-slate-200 dark:bg-white/5"></div>
+                    <span>Or Sign Up With</span>
+                    <div className="h-[1px] flex-grow bg-slate-200 dark:bg-white/5"></div>
                 </div>
-                <div className="text-center flex flex-col space-y-2 mt-5 items-center">
-                    <FcGoogle className="h-16 w-16 cursor-pointer" onClick={handleRegisterWithGoogle}></FcGoogle>
-                    <p className="">Already have an account ? <span className="font-bold text-blue-600"><Link to="/login">Login Here</Link></span></p>
+
+                {/* Social Signup & Login Link */}
+                <div className="space-y-4 text-center">
+                    <button 
+                        onClick={handleRegisterWithGoogle}
+                        className="w-full flex items-center justify-center gap-3 px-5 py-3 border border-slate-200 dark:border-white/10 rounded-2xl bg-white dark:bg-white/5 text-sm font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/10 transition-all hover:scale-[1.01] active:scale-[0.99]"
+                    >
+                        <FcGoogle className="w-5 h-5" />
+                        <span>Google Identity Single Sign-On</span>
+                    </button>
+                    
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                        Already have an account?{" "}
+                        <Link 
+                            to="/login" 
+                            className="font-bold text-orange-500 hover:text-orange-600 transition-colors hover:underline"
+                        >
+                            Login here
+                        </Link>
+                    </p>
                 </div>
 
             </div>
