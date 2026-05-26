@@ -55,15 +55,15 @@ const BookNow = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-            <div className="backdrop-blur-md bg-white/80 dark:bg-[#130E26]/80 border border-slate-200 dark:border-white/5 rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl space-y-10">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-10 md:p-12 shadow-sm space-y-10">
                 
                 {/* Section Header */}
                 <div className="text-center space-y-3 max-w-xl mx-auto">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-xs font-semibold uppercase tracking-wider">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 text-xs font-semibold uppercase tracking-wider">
                         📅 Appointment Booking
                     </span>
                     <h2 className="text-3xl md:text-4xl font-black text-slate-800 dark:text-slate-100">
-                        Book Your <span className="text-gradient-orange">Repair Service</span>
+                        Book Your <span className="text-blue-600">Repair Service</span>
                     </h2>
                     <p className="text-sm text-slate-500 dark:text-slate-400">
                         Review the service details below, choose your preferred diagnostic scheduling date, and add any specific instructions for our repair technician.
@@ -86,7 +86,7 @@ const BookNow = () => {
                                 name="service_id" 
                                 defaultValue={service._id} 
                                 readOnly 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/50 dark:bg-white/5 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
                                 required 
                             />
                         </div>
@@ -102,7 +102,7 @@ const BookNow = () => {
                                 name="service_name" 
                                 defaultValue={service.serviceName} 
                                 readOnly 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/50 dark:bg-white/5 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
                                 required 
                             />
                         </div>
@@ -118,7 +118,7 @@ const BookNow = () => {
                                 name="service_image" 
                                 defaultValue={service.imageUrl} 
                                 readOnly 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/50 dark:bg-white/5 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
                                 required 
                             />
                         </div>
@@ -134,7 +134,7 @@ const BookNow = () => {
                                 name="provider_email" 
                                 defaultValue={service.providerEmail} 
                                 readOnly 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/50 dark:bg-white/5 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
                                 required 
                             />
                         </div>
@@ -150,7 +150,7 @@ const BookNow = () => {
                                 name="provider_name" 
                                 defaultValue={service.providerName} 
                                 readOnly 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/50 dark:bg-white/5 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
                                 required 
                             />
                         </div>
@@ -166,7 +166,7 @@ const BookNow = () => {
                                 name="current_user_email" 
                                 defaultValue={user.email} 
                                 readOnly 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/50 dark:bg-white/5 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
                                 required 
                             />
                         </div>
@@ -182,7 +182,7 @@ const BookNow = () => {
                                 name="current_user_name" 
                                 defaultValue={user.displayName} 
                                 readOnly 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/50 dark:bg-white/5 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
                                 required 
                             />
                         </div>
@@ -198,7 +198,7 @@ const BookNow = () => {
                                 name="price" 
                                 defaultValue={service.price} 
                                 readOnly 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/50 dark:bg-white/5 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 cursor-not-allowed text-sm focus:outline-none opacity-80" 
                                 required 
                             />
                         </div>
@@ -207,14 +207,14 @@ const BookNow = () => {
                         <div className="space-y-2">
                             <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                                 Appointment Date
-                                <HiOutlineCalendar className="w-4 h-4 text-orange-500" />
+                                <HiOutlineCalendar className="w-4 h-4 text-blue-600" />
                             </label>
                             <input 
                                 type="date" 
                                 name="service_tacking_date" 
                                 ref={serviceDateRef} 
                                 required 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 text-sm focus:outline-none transition-all" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm focus:outline-none transition-all" 
                             />
                         </div>
 
@@ -222,14 +222,14 @@ const BookNow = () => {
                         <div className="space-y-2">
                             <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                                 Special Instructions
-                                <HiOutlineChatBubbleBottomCenterText className="w-4 h-4 text-orange-500" />
+                                <HiOutlineChatBubbleBottomCenterText className="w-4 h-4 text-blue-600" />
                             </label>
                             <input 
                                 type="text" 
                                 name="special_instruction" 
                                 required 
                                 placeholder="E.g., device address, customized time slot..." 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
                             />
                         </div>
 
@@ -239,7 +239,7 @@ const BookNow = () => {
                     <div className="pt-4">
                         <button 
                             type="submit" 
-                            className="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-extrabold rounded-2xl shadow-lg shadow-orange-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all text-sm uppercase tracking-wider"
+                            className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-sm active:scale-[0.99] transition-all text-sm uppercase tracking-wider"
                         >
                             Purchase Service Booking
                         </button>

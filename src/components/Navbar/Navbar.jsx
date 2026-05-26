@@ -38,7 +38,7 @@ const Navbar = () => {
     ];
 
     return (
-        <header className="sticky top-0 z-40 w-full transition-all duration-300 backdrop-blur-md bg-white/80 dark:bg-[#0B081A]/80 border-b border-slate-200/50 dark:border-white/5 shadow-sm">
+        <header className="sticky top-0 z-40 w-full transition-all duration-300 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     
@@ -51,7 +51,7 @@ const Navbar = () => {
                                 className="w-11 h-9 object-contain group-hover:scale-105 transition-all duration-300" 
                             />
                             <span className="text-xl md:text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">
-                                ELECTRO<span className="text-orange-500 group-hover:text-orange-600 transition-colors">FIXERS</span>
+                                ELECTRO<span className="text-blue-600 group-hover:text-blue-700 transition-colors">FIXERS</span>
                             </span>
                         </Link>
                     </div>
@@ -65,16 +65,16 @@ const Navbar = () => {
                                 className={({ isActive }) => 
                                     `relative text-sm font-semibold tracking-wide transition-colors duration-300 py-1.5 px-1 group ${
                                         isActive 
-                                            ? "text-orange-500 font-extrabold" 
-                                            : "text-slate-600 dark:text-slate-300 hover:text-orange-500"
+                                            ? "text-blue-600 font-bold" 
+                                            : "text-slate-600 dark:text-slate-300 hover:text-blue-600"
                                     }`
                                 }
                             >
                                 {({ isActive }) => (
                                     <>
                                         {link.name}
-                                        {/* Glowing line indicator beneath active links */}
-                                        <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-orange-500 rounded-full transition-transform duration-300 origin-left ${
+                                        {/* Line indicator beneath active links */}
+                                        <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-blue-600 rounded-full transition-transform duration-300 origin-left ${
                                             isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-50"
                                         }`} />
                                     </>
@@ -89,7 +89,7 @@ const Navbar = () => {
                         {/* Theme Toggle Button (Desktop) */}
                         <button 
                             onClick={() => setIsDark(isDark === 'dark' ? 'light' : 'dark')}
-                            className="hidden lg:flex p-2.5 rounded-xl border border-slate-200/50 dark:border-white/5 hover:border-orange-500/30 hover:bg-orange-500/5 text-slate-600 dark:text-slate-300 hover:text-orange-500 transition-all duration-300 hover:scale-105"
+                            className="hidden lg:flex p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-blue-600/30 hover:bg-blue-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 transition-all duration-300"
                             aria-label="Toggle Theme Mode"
                         >
                             {isDark === 'dark' ? <HiOutlineSun className="w-5 h-5" /> : <HiOutlineMoon className="w-5 h-5" />}
@@ -98,14 +98,14 @@ const Navbar = () => {
                         {/* Login / Profile Slot */}
                         <div className="hidden lg:flex items-center gap-3">
                             {loading ? (
-                                <div className="w-10 h-10 rounded-full bg-slate-200/50 dark:bg-white/5 animate-pulse flex items-center justify-center">
-                                    <span className="w-4 h-4 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"></span>
+                                <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 animate-pulse flex items-center justify-center">
+                                    <span className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></span>
                                 </div>
                             ) : user ? (
                                 <>
                                     {/* User Avatar */}
                                     <Link to="/dashboard" className="avatar cursor-pointer" data-tooltip-id="user-tooltip">
-                                        <div className="w-10 h-10 rounded-full border-2 border-orange-500/60 hover:border-orange-500 ring-2 ring-offset-2 ring-offset-white dark:ring-offset-[#0B081A] ring-slate-100 dark:ring-white/10 transition-all hover:scale-105">
+                                        <div className="w-10 h-10 rounded-full border-2 border-blue-600/60 hover:border-blue-600 ring-2 ring-offset-2 ring-offset-white dark:ring-offset-slate-900 ring-slate-100 dark:ring-slate-800 transition-all">
                                             <img src={user.photoURL || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} alt={user.displayName} />
                                         </div>
                                     </Link>
@@ -113,7 +113,7 @@ const Navbar = () => {
                                     {/* Logout Button */}
                                     <button 
                                         onClick={handleLogOut} 
-                                        className="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white text-sm font-extrabold rounded-xl shadow-md shadow-orange-500/20 hover:scale-[1.03] active:scale-[0.98] transition-all"
+                                        className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg shadow-sm transition-all"
                                     >
                                         Logout
                                     </button>
@@ -121,7 +121,7 @@ const Navbar = () => {
                             ) : (
                                 <Link 
                                     to="/login" 
-                                    className="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white text-sm font-extrabold rounded-xl shadow-md shadow-orange-500/20 hover:scale-[1.03] active:scale-[0.98] transition-all"
+                                    className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg shadow-sm transition-all"
                                 >
                                     Login
                                 </Link>
@@ -131,7 +131,7 @@ const Navbar = () => {
                         {/* Hamburger Menu Trigger (Mobile) */}
                         <button 
                             onClick={() => setIsDrawerOpen(true)}
-                            className="lg:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-all"
+                            className="lg:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
                             aria-label="Open menu"
                         >
                             <HiOutlineBars3 className="w-7 h-7" />
@@ -151,19 +151,19 @@ const Navbar = () => {
                 />
 
                 {/* Sliding Content Drawer */}
-                <aside className={`absolute inset-y-0 right-0 w-80 bg-white dark:bg-[#130E26] shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out z-10 ${isDrawerOpen ? "translate-x-0" : "translate-x-full"}`}>
+                <aside className={`absolute inset-y-0 right-0 w-80 bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-xl flex flex-col transform transition-transform duration-300 ease-in-out z-10 ${isDrawerOpen ? "translate-x-0" : "translate-x-full"}`}>
                     
                     {/* Drawer Header */}
-                    <div className="p-6 flex items-center justify-between border-b border-slate-100 dark:border-white/5">
+                    <div className="p-6 flex items-center justify-between border-b border-slate-200 dark:border-slate-800">
                         <div className="flex items-center gap-2">
                             <img src={logo} alt="Logo" className="w-8 h-7 object-contain" />
                             <span className="font-extrabold text-slate-800 dark:text-slate-100">
-                                ELECTRO<span className="text-orange-500">FIXERS</span>
+                                ELECTRO<span className="text-blue-600">FIXERS</span>
                             </span>
                         </div>
                         <button 
                             onClick={() => setIsDrawerOpen(false)}
-                            className="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-all"
+                            className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
                         >
                             <HiOutlineXMark className="w-6 h-6" />
                         </button>
@@ -171,15 +171,15 @@ const Navbar = () => {
 
                     {/* Quick Profile Section inside Drawer */}
                     {user && (
-                        <div className="p-6 flex items-center gap-3.5 bg-slate-50/50 dark:bg-white/[0.02] border-b border-slate-100 dark:border-white/5">
+                        <div className="p-6 flex items-center gap-3.5 bg-slate-50 dark:bg-slate-800/30 border-b border-slate-200 dark:border-slate-800">
                             <img 
                                 src={user.photoURL || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} 
                                 alt={user.displayName} 
-                                className="w-12 h-12 rounded-full object-cover border border-orange-500 p-0.5"
+                                className="w-12 h-12 rounded-full object-cover border border-blue-600 p-0.5"
                             />
                             <div>
-                                <h4 className="font-extrabold text-slate-800 dark:text-slate-200 text-sm line-clamp-1">{user.displayName}</h4>
-                                <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5 line-clamp-1">{user.email}</p>
+                                <h4 className="font-bold text-slate-800 dark:text-slate-200 text-sm line-clamp-1">{user.displayName}</h4>
+                                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">{user.email}</p>
                             </div>
                         </div>
                     )}
@@ -192,10 +192,10 @@ const Navbar = () => {
                                 to={link.path}
                                 onClick={() => setIsDrawerOpen(false)}
                                 className={({ isActive }) => 
-                                    `flex items-center px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                                    `flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
                                         isActive 
-                                            ? "text-orange-500 bg-orange-500/10 font-bold" 
-                                            : "text-slate-600 dark:text-slate-400 hover:text-orange-500 hover:bg-slate-50 dark:hover:bg-white/5"
+                                            ? "text-blue-600 bg-blue-50 dark:bg-blue-900/20 font-bold" 
+                                            : "text-slate-600 dark:text-slate-400 hover:text-blue-600 hover:bg-slate-50 dark:hover:bg-slate-800/50"
                                     }`
                                 }
                             >
@@ -205,17 +205,17 @@ const Navbar = () => {
                     </nav>
 
                     {/* Drawer Footer Actions */}
-                    <div className="p-5 border-t border-slate-100 dark:border-white/5 space-y-4">
+                    <div className="p-5 border-t border-slate-200 dark:border-slate-800 space-y-4">
                         
                         {/* Theme Toggle in Drawer */}
                         <div className="flex items-center justify-between px-3 py-1">
-                            <span className="text-xs font-bold text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
-                                <HiOutlineSparkles className="w-4 h-4 text-orange-500" />
+                            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                                <HiOutlineSparkles className="w-4 h-4 text-blue-600" />
                                 Theme Mode
                             </span>
                             <button 
                                 onClick={() => setIsDark(isDark === 'dark' ? 'light' : 'dark')}
-                                className="p-2.5 rounded-xl border border-slate-200 dark:border-white/5 text-orange-500 bg-slate-50 dark:bg-white/5 transition-transform active:scale-95"
+                                className="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-blue-600 bg-slate-50 dark:bg-slate-800 transition-transform active:scale-95"
                             >
                                 {isDark === 'dark' ? <HiOutlineSun className="w-5 h-5" /> : <HiOutlineMoon className="w-5 h-5" />}
                             </button>
@@ -225,7 +225,7 @@ const Navbar = () => {
                         {user ? (
                             <button 
                                 onClick={handleLogOut} 
-                                className="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-extrabold text-sm rounded-xl shadow-md transition-all text-center"
+                                className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-lg shadow-sm transition-all text-center"
                             >
                                 Logout
                             </button>
@@ -233,7 +233,7 @@ const Navbar = () => {
                             <Link 
                                 to="/login" 
                                 onClick={() => setIsDrawerOpen(false)}
-                                className="block w-full py-3 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-extrabold text-sm rounded-xl shadow-md transition-all text-center"
+                                className="block w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-lg shadow-sm transition-all text-center"
                             >
                                 Login
                             </Link>

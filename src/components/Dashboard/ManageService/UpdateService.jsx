@@ -51,15 +51,15 @@ const UpdateService = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-            <div className="backdrop-blur-md bg-white/80 dark:bg-[#130E26]/80 border border-slate-200 dark:border-white/5 rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl space-y-10">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-10 md:p-12 shadow-sm space-y-10">
                 
                 {/* Section Header */}
                 <div className="text-center space-y-3 max-w-xl mx-auto">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-xs font-semibold uppercase tracking-wider">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 text-xs font-semibold uppercase tracking-wider">
                         ⚙️ Manage Listing
                     </span>
                     <h2 className="text-3xl md:text-4xl font-black text-slate-800 dark:text-slate-100">
-                        Update <span className="text-gradient-orange">Service details</span>
+                        Update <span className="text-blue-600">Service details</span>
                     </h2>
                     <p className="text-sm text-slate-500 dark:text-slate-400">
                         Make modifications to your repair service details below. Any updates will reflect instantly on the public catalog index.
@@ -75,14 +75,14 @@ const UpdateService = () => {
                         <div className="space-y-2">
                             <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                                 Service Name
-                                <HiOutlineSparkles className="w-4 h-4 text-orange-500" />
+                                <HiOutlineSparkles className="w-4 h-4 text-blue-600" />
                             </label>
                             <input 
                                 type="text" 
                                 name="service_name" 
                                 defaultValue={serviceName}
                                 placeholder="E.g., iPhone Screen Replacement" 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
                                 required 
                             />
                         </div>
@@ -91,14 +91,14 @@ const UpdateService = () => {
                         <div className="space-y-2">
                             <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                                 Price ($)
-                                <HiOutlineCurrencyDollar className="w-4 h-4 text-orange-500" />
+                                <HiOutlineCurrencyDollar className="w-4 h-4 text-blue-600" />
                             </label>
                             <input 
                                 type="number" 
                                 name="service_price" 
                                 defaultValue={price}
                                 placeholder="E.g., 49" 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
                                 required 
                             />
                         </div>
@@ -107,14 +107,14 @@ const UpdateService = () => {
                         <div className="space-y-2 md:col-span-2">
                             <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                                 Service Area
-                                <HiOutlineMapPin className="w-4 h-4 text-orange-500" />
+                                <HiOutlineMapPin className="w-4 h-4 text-blue-600" />
                             </label>
                             <input 
                                 type="text" 
                                 name="service_area" 
                                 defaultValue={serviceArea}
                                 placeholder="E.g., Silicon Valley, CA (or Doorstep Service)" 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
                                 required 
                             />
                         </div>
@@ -123,14 +123,14 @@ const UpdateService = () => {
                         <div className="space-y-2 md:col-span-2">
                             <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                                 Service Description
-                                <HiOutlineDocumentText className="w-4 h-4 text-orange-500" />
+                                <HiOutlineDocumentText className="w-4 h-4 text-blue-600" />
                             </label>
                             <textarea 
                                 name="service_description" 
                                 rows="3"
                                 defaultValue={description}
                                 placeholder="Describe the diagnostic details, components used, and service terms..." 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 text-sm focus:outline-none transition-all placeholder-slate-400 resize-none" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm focus:outline-none transition-all placeholder-slate-400 resize-none" 
                                 required 
                             />
                         </div>
@@ -139,14 +139,14 @@ const UpdateService = () => {
                         <div className="space-y-2 md:col-span-2">
                             <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                                 Service Image URL
-                                <HiOutlinePhoto className="w-4 h-4 text-orange-500" />
+                                <HiOutlinePhoto className="w-4 h-4 text-blue-600" />
                             </label>
                             <input 
                                 type="text" 
                                 name="image" 
                                 defaultValue={imageUrl}
                                 placeholder="Paste high-res visual banner URL..." 
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
+                                className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm focus:outline-none transition-all placeholder-slate-400" 
                                 required 
                             />
                         </div>
@@ -157,7 +157,7 @@ const UpdateService = () => {
                     <div className="pt-4">
                         <button 
                             type="submit" 
-                            className="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-extrabold rounded-2xl shadow-lg shadow-orange-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all text-sm uppercase tracking-wider"
+                            className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-sm active:scale-[0.99] transition-all text-sm uppercase tracking-wider"
                         >
                             Save Repairs Details Changes
                         </button>

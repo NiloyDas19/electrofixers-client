@@ -11,67 +11,39 @@
   }
 }
 
-/* Glassmorphism & High-End Card Utilities */
+/* Corporate & Flat Utilities */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #e2e8f0;
 }
 
 .dark .glass-panel {
-  background: rgba(19, 14, 38, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid #1e293b;
 }
 
 .glass-card-interactive {
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  border: 1px solid #f1f5f9;
+  background: #ffffff;
 }
 
-.glass-card-interactive::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), transparent);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-.dark .glass-card-interactive::after {
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+.dark .glass-card-interactive {
+  background: #0f172a;
+  border: 1px solid #1e293b;
 }
 
 .glass-card-interactive:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px -15px rgba(255, 107, 53, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  border-color: #cbd5e1;
 }
 
 .dark .glass-card-interactive:hover {
-  box-shadow: 0 20px 40px -15px rgba(255, 107, 53, 0.25);
-  background: rgba(25, 20, 48, 0.85);
-}
-
-/* Custom Text Gradient */
-.text-gradient-orange {
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8F3D 50%, #FFB03A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-purple {
-  background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  border-color: #334155;
 }
 
 /* Animations */
@@ -80,7 +52,7 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
   }
 }
 
@@ -88,25 +60,12 @@
   animation: float 6s ease-in-out infinite;
 }
 
-@keyframes pulse-subtle {
-  0%, 100% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 0.4;
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-subtle 4s ease-in-out infinite;
-}
-
 /* Modern Input Styling */
 .modern-input {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s ease;
 }
 
 .modern-input:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.25);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); /* Corporate Blue */
 }
