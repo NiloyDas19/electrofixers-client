@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import DocumentTitle from '../../../documentTitle/DocumentTitle';
 import { AuthContext } from '../../../providers/AuthProviders';
 import swal from 'sweetalert';
-import { HiOutlineSparkles, HiOutlineCash, HiOutlineMapPin, HiOutlineDocumentText, HiOutlinePhotograph } from "react-icons/hi2";
+import { HiOutlineSparkles, HiOutlineCurrencyDollar, HiOutlineMapPin, HiOutlineDocumentText, HiOutlinePhoto } from "react-icons/hi2";
 
 const AddService = () => {
     DocumentTitle('Add Service');
@@ -86,7 +86,7 @@ const AddService = () => {
                         <div className="space-y-2">
                             <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                                 Price ($)
-                                <HiOutlineCash className="w-4 h-4 text-orange-500" />
+                                <HiOutlineCurrencyDollar className="w-4 h-4 text-orange-500" />
                             </label>
                             <input 
                                 type="number" 
@@ -131,7 +131,7 @@ const AddService = () => {
                         <div className="space-y-2 md:col-span-2">
                             <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                                 Service Image URL
-                                <HiOutlinePhotograph className="w-4 h-4 text-orange-500" />
+                                <HiOutlinePhoto className="w-4 h-4 text-orange-500" />
                             </label>
                             <input 
                                 type="text" 

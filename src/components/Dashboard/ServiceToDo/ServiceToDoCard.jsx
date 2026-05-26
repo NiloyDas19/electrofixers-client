@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { HiOutlineCalendar, HiOutlineUser, HiOutlineMail, HiOutlineWrenchScrewdriver, HiOutlineChatBubbleLeftEllipsis } from "react-icons/hi2";
+import { HiOutlineCalendar, HiOutlineUser, HiOutlineEnvelope, HiOutlineWrench, HiOutlineChatBubbleLeftEllipsis } from "react-icons/hi2";
 import swal from 'sweetalert';
 
 const ServiceToDOCard = ({ service }) => {
@@ -82,15 +82,15 @@ const ServiceToDOCard = ({ service }) => {
                             <span className="font-semibold text-slate-700 dark:text-slate-300">{userName}</span>
                         </div>
                         <div className="flex justify-between items-center text-slate-500 dark:text-slate-400">
-                            <span className="flex items-center gap-1"><HiOutlineMail /> Email</span>
+                            <span className="flex items-center gap-1"><HiOutlineEnvelope /> Email</span>
                             <span className="font-medium text-slate-600 dark:text-slate-400 truncate max-w-[150px]">{userEmail}</span>
                         </div>
                         <div className="flex justify-between items-center text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-white/5 pt-2 mt-2">
-                            <span className="flex items-center gap-1"><HiOutlineWrenchScrewdriver /> Provider</span>
+                            <span className="flex items-center gap-1"><HiOutlineWrench /> Provider</span>
                             <span className="font-semibold text-slate-700 dark:text-slate-300">{providerName}</span>
                         </div>
                         <div className="flex justify-between items-center text-slate-500 dark:text-slate-400">
-                            <span className="flex items-center gap-1"><HiOutlineMail /> Email</span>
+                            <span className="flex items-center gap-1"><HiOutlineEnvelope /> Email</span>
                             <span className="font-medium text-slate-600 dark:text-slate-400 truncate max-w-[150px]">{providerEmail}</span>
                         </div>
                     </div>
