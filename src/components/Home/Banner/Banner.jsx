@@ -37,7 +37,7 @@ const Banner = () => {
     ];
 
     return (
-        <section className="relative h-[650px] w-full overflow-hidden flex items-center justify-center">
+        <section className="relative min-h-[580px] sm:min-h-[620px] lg:h-[650px] w-full overflow-hidden flex items-center justify-center py-10 lg:py-0">
             
             {/* Background Images with Zoom & Crossfade Effect */}
             <div className="absolute inset-0 z-0">
@@ -60,14 +60,14 @@ const Banner = () => {
             <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-orange-500/20 rounded-full blur-[100px] pointer-events-none animate-pulse-glow z-0"></div>
 
             {/* Glassmorphic Content Card Overlay */}
-            <div className="relative z-10 max-w-7xl w-[90%] mx-auto flex justify-start">
-                <div className="backdrop-blur-md bg-white/10 dark:bg-black/20 border border-white/20 dark:border-white/10 text-white rounded-3xl p-8 md:p-16 max-w-2xl shadow-2xl space-y-6 hover:border-orange-500/30 transition-all duration-500">
+            <div className="relative z-10 max-w-7xl w-[92%] sm:w-[90%] mx-auto flex justify-start">
+                <div className="backdrop-blur-md bg-white/10 dark:bg-black/20 border border-white/20 dark:border-white/10 text-white rounded-3xl p-6 sm:p-10 md:p-16 max-w-2xl shadow-2xl space-y-5 sm:space-y-6 hover:border-orange-500/30 transition-all duration-500">
                     
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-400 text-xs font-semibold tracking-wider uppercase animate-pulse">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-400 text-[10px] sm:text-xs font-semibold tracking-wider uppercase animate-pulse">
                         🛡️ Trusted Repair Center
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl font-black leading-tight tracking-tight drop-shadow-md text-white">
+                    <h1 className="text-2xl sm:text-3xl md:text-5xl font-black leading-tight tracking-tight drop-shadow-md text-white">
                         {bannerDetails[imageIndex].title.split(" ").map((word, idx) => {
                             if (word === "Repairs" || word === "Maintenance" || word === "Solutions" || word === "Repair") {
                                 return <span key={idx} className="text-orange-500 block md:inline">{word} </span>;
@@ -76,14 +76,14 @@ const Banner = () => {
                         })}
                     </h1>
 
-                    <p className="text-base md:text-lg text-slate-200 leading-relaxed drop-shadow-sm font-medium">
+                    <p className="text-xs sm:text-sm md:text-lg text-slate-200 leading-relaxed drop-shadow-sm font-medium">
                         {bannerDetails[imageIndex].description}
                     </p>
 
-                    <div className="pt-4 flex flex-wrap gap-4">
+                    <div className="pt-2 sm:pt-4 flex flex-wrap gap-3 sm:gap-4">
                         <Link 
                             to="/all-services" 
-                            className="px-8 py-3.5 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold rounded-2xl shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center gap-2 text-sm"
+                            className="px-6 py-3 sm:px-8 sm:py-3.5 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold rounded-2xl shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center gap-2 text-xs sm:text-sm"
                         >
                             Explore Services
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -93,19 +93,19 @@ const Banner = () => {
                         
                         <a 
                             href="#about-us" 
-                            className="px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-2xl border border-white/20 backdrop-blur-sm hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 text-sm"
+                            className="px-6 py-3 sm:px-8 sm:py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-2xl border border-white/20 backdrop-blur-sm hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 text-xs sm:text-sm"
                         >
                             Learn More
                         </a>
                     </div>
 
                     {/* Progress Dash Indicators */}
-                    <div className="flex gap-2 pt-6">
+                    <div className="flex gap-2 pt-4 sm:pt-6">
                         {images.map((_, idx) => (
                             <button
                                 key={idx}
                                 onClick={() => setImageIndex(idx)}
-                                className={`h-2 rounded-full transition-all duration-500 ${idx === imageIndex ? 'w-8 bg-orange-500' : 'w-2 bg-white/30 hover:bg-white/50'}`}
+                                className={`h-1.5 sm:h-2 rounded-full transition-all duration-500 ${idx === imageIndex ? 'w-6 sm:w-8 bg-orange-500' : 'w-1.5 sm:w-2 bg-white/30 hover:bg-white/50'}`}
                                 aria-label={`Go to slide ${idx + 1}`}
                             />
                         ))}

@@ -21,6 +21,9 @@ import ServiceDetails from './components/ServiceDetails/ServiceDetails';
 import BookNow from './components/BookNow/BookNow';
 import UpdateService from './components/Dashboard/ManageService/UpdateService';
 
+import DashboardLayout from './components/Dashboard/DashboardLayout';
+import DashboardHome from './components/Dashboard/DashboardHome';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -47,23 +50,38 @@ const router = createBrowserRouter([
         loader: () => fetch('https://elctrofixers-client-side.vercel.app/services')
       },
       {
-        path: "/add-service",
-        element: <PrivateRoutes><AddService></AddService></PrivateRoutes>
-      },
-      {
-        path: "/manage-service",
-        element: <PrivateRoutes><ManageService></ManageService></PrivateRoutes>,
-        loader: () => fetch('https://elctrofixers-client-side.vercel.app/services')
-      },
-      {
-        path: "/booked-services",
-        element: <PrivateRoutes><BookedServices></BookedServices> </PrivateRoutes>,
-        loader: () => fetch("https://elctrofixers-client-side.vercel.app/book-service")
-      },
-      {
-        path: "/service-to-do",
-        element: <PrivateRoutes> <ServiceToDo></ServiceToDo> </PrivateRoutes>,
-        loader: () => fetch("https://elctrofixers-client-side.vercel.app/book-service")
+        path: "/dashboard",
+        element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
+        children: [
+          {
+            index: true,
+            element: <DashboardHome></DashboardHome>
+          },
+          {
+            path: "add-service",
+            element: <AddService></AddService>
+          },
+          {
+            path: "manage-service",
+            element: <ManageService></ManageService>,
+            loader: () => fetch('https://elctrofixers-client-side.vercel.app/services')
+          },
+          {
+            path: "booked-services",
+            element: <BookedServices></BookedServices>,
+            loader: () => fetch("https://elctrofixers-client-side.vercel.app/book-service")
+          },
+          {
+            path: "service-to-do",
+            element: <ServiceToDo></ServiceToDo>,
+            loader: () => fetch("https://elctrofixers-client-side.vercel.app/book-service")
+          },
+          {
+            path: "update-service/:id",
+            element: <UpdateService></UpdateService>,
+            loader: ({ params }) => fetch(`https://elctrofixers-client-side.vercel.app/services/${params.id}`)
+          }
+        ]
       },
       {
         path: "/services/:id",
@@ -73,11 +91,6 @@ const router = createBrowserRouter([
       {
         path: "/book-now/:id",
         element: <PrivateRoutes><BookNow></BookNow></PrivateRoutes>,
-        loader: ({ params }) => fetch(`https://elctrofixers-client-side.vercel.app/services/${params.id}`)
-      },
-      {
-        path: "/update-service/:id",
-        element: <PrivateRoutes><UpdateService></UpdateService></PrivateRoutes>,
         loader: ({ params }) => fetch(`https://elctrofixers-client-side.vercel.app/services/${params.id}`)
       }
     ]

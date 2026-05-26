@@ -13,7 +13,7 @@ const Root = () => {
             <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-orange-500/10 blur-[120px] pointer-events-none z-0 animate-pulse-glow"></div>
             <div className="absolute bottom-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-purple-600/10 blur-[150px] pointer-events-none z-0 animate-pulse-glow"></div>
             
-            <div className="relative z-10 flex flex-col min-h-screen">
+            <div className="relative z-10 flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
                 <Navbar />
                 <main className="flex-grow">
                     <Outlet />

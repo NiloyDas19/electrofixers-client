@@ -47,7 +47,7 @@ const AddService = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-            <div className="backdrop-blur-md bg-white/80 dark:bg-[#130E26]/80 border border-slate-200 dark:border-white/5 rounded-3xl p-8 md:p-12 shadow-2xl space-y-10">
+            <div className="backdrop-blur-md bg-white/80 dark:bg-[#130E26]/80 border border-slate-200 dark:border-white/5 rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl space-y-10">
                 
                 {/* Section Header */}
                 <div className="text-center space-y-3 max-w-xl mx-auto">

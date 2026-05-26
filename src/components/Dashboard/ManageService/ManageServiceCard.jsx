@@ -87,7 +87,7 @@ const ManageServiceCard = ({ service }) => {
                     {/* Actions Panel */}
                     <div className="flex gap-2 w-full sm:w-auto justify-end">
                         <Link 
-                            to={`/update-service/${_id}`}
+                            to={`/dashboard/update-service/${_id}`}
                             className="flex items-center gap-1 px-4 py-2 bg-slate-900 hover:bg-orange-500 dark:bg-white/5 dark:hover:bg-orange-500 text-white text-xs font-bold uppercase rounded-xl transition-all duration-300"
                         >
                             <HiOutlinePencilSquare className="w-3.5 h-3.5" />
