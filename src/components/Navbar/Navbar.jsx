@@ -23,7 +23,6 @@ const Navbar = () => {
         setIsDrawerOpen(false);
         logOut()
             .then(() => {
-                console.log("Log Out Successful");
             })
             .catch((error) => {
                 console.error("Logout error:", error.message);

@@ -23,7 +23,6 @@ const ServiceToDOCard = ({ service }) => {
                 } else {
                     swal("Success", `Status stays: ${newStatus.toUpperCase()}`, "info");
                 }
-                console.log(data);
             })
     }
 

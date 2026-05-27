@@ -35,13 +35,11 @@ const Register = () => {
 
         createUserWithEmailPassword(email, password)
             .then(result => {
-                console.log("registration Successful", result.user);
                 updateProfile(auth.currentUser, {
                     displayName: name, photoURL: photoUrl
                 }).then(() => {
                     // Profile updated!
                 }).catch((error) => {
-                    console.log(error.message);
                 });
                 result.user.displayName = name;
                 result.user.photoURL = photoUrl;
@@ -67,7 +65,6 @@ const Register = () => {
     const handleRegisterWithGoogle = () => {
         createWithGoogle()
             .then((result) => {
-                console.log(result.user);
                 swal({
                     icon: "success",
                     title: "Welcome aboard!",

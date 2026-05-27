@@ -20,7 +20,6 @@ const Login = () => {
 
         loginWithEmailPassword(email, password)
             .then(result => {
-                console.log(result.user);
                 swal({
                     icon: "success",
                     title: "Welcome Back!",
@@ -43,7 +42,6 @@ const Login = () => {
     const handleLoginWithGoogle = () => {
         loginWithGoogle()
             .then((result) => {
-                console.log(result.user);
                 swal({
                     icon: "success",
                     title: "Welcome Back!",

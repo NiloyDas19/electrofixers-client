@@ -26,8 +26,6 @@ const UpdateService = () => {
 
         const updateServiceData = { imageUrl: imageUrlInput, serviceName: serviceNameInput, price: priceInput, serviceArea: serviceAreaInput, description: descriptionInput, providerEmail, providerImageUrl, providerName };
 
-        console.log(updateServiceData);
-
         fetch(`https://elctrofixers-client-side.vercel.app/update-service/${_id}`, {
             method: "PUT",
             headers: {

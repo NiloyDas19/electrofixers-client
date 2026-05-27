@@ -22,8 +22,6 @@ const AddService = () => {
 
         const newService = { imageUrl, serviceName, price, serviceArea, description, providerEmail, providerImageUrl, providerName };
 
-        console.log(newService);
-
         fetch('https://elctrofixers-client-side.vercel.app/services', {
             method: "POST",
             headers: {

@@ -1,71 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  body {
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
     scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #fafafa;
+    color: #18181b;
+  }
+
+  .dark body {
+    background-color: #09090b;
+    color: #fafafa;
+  }
+
+  /* Remove default button styles */
+  button {
+    cursor: pointer;
+  }
+
+  /* Remove default list styles */
+  ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 }
 
-/* Corporate & Flat Utilities */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid #e2e8f0;
-}
-
-.dark .glass-panel {
-  background: rgba(15, 23, 42, 0.95);
-  border: 1px solid #1e293b;
-}
-
-.glass-card-interactive {
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid #f1f5f9;
-  background: #ffffff;
-}
-
-.dark .glass-card-interactive {
-  background: #0f172a;
-  border: 1px solid #1e293b;
-}
-
-.glass-card-interactive:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-  border-color: #cbd5e1;
-}
-
-.dark .glass-card-interactive:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-  border-color: #334155;
-}
-
-/* Animations */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
+@layer components {
+  /* ─── Minimal Card ─── */
+  .card-minimal {
+    @apply bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-lg transition-all duration-200;
   }
-  50% {
-    transform: translateY(-5px);
+
+  .card-minimal:hover {
+    @apply border-zinc-200 dark:border-zinc-700;
+  }
+
+  /* ─── Form inputs ─── */
+  .input-minimal {
+    @apply w-full border-0 border-b border-zinc-300 dark:border-zinc-700 bg-transparent
+           text-zinc-900 dark:text-zinc-100 text-sm py-2.5 px-0
+           focus:outline-none focus:border-zinc-900 dark:focus:border-white
+           placeholder-zinc-400 transition-colors duration-200;
+  }
+
+  /* Boxed variant for dashboard forms */
+  .input-box {
+    @apply w-full border border-zinc-200 dark:border-zinc-700 rounded bg-white dark:bg-zinc-900
+           text-zinc-900 dark:text-zinc-100 text-sm px-3 py-2.5
+           focus:outline-none focus:border-zinc-900 dark:focus:border-zinc-400
+           placeholder-zinc-400 transition-colors duration-200;
+  }
+
+  /* Read-only input */
+  .input-readonly {
+    @apply input-box opacity-50 cursor-not-allowed bg-zinc-50 dark:bg-zinc-800;
+  }
+
+  /* ─── Buttons ─── */
+  .btn-primary {
+    @apply bg-zinc-900 dark:bg-white text-white dark:text-zinc-900
+           text-sm font-semibold px-5 py-2.5 rounded
+           hover:bg-zinc-700 dark:hover:bg-zinc-100
+           active:scale-95 transition-all duration-150 inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-outline {
+    @apply border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300
+           text-sm font-medium px-5 py-2.5 rounded
+           hover:border-zinc-900 dark:hover:border-white hover:text-zinc-900 dark:hover:text-white
+           active:scale-95 transition-all duration-150 inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-ghost {
+    @apply text-zinc-600 dark:text-zinc-400 text-sm font-medium px-3 py-2 rounded
+           hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800
+           active:scale-95 transition-all duration-150 inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-danger {
+    @apply border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400
+           text-sm font-medium px-4 py-2 rounded
+           hover:bg-red-50 dark:hover:bg-red-950
+           active:scale-95 transition-all duration-150 inline-flex items-center justify-center gap-2;
+  }
+
+  /* ─── Page label (small uppercase eyebrow) ─── */
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-widest text-zinc-400;
+  }
+
+  /* ─── Section divider ─── */
+  .divider-h {
+    @apply border-t border-zinc-100 dark:border-zinc-800;
+  }
+
+  /* ─── Status pill ─── */
+  .status-pending   { @apply text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full; }
+  .status-working   { @apply text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-2.5 py-0.5 rounded-full; }
+  .status-completed { @apply text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full; }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
   }
 }
 
-.animate-float-slow {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Modern Input Styling */
-.modern-input {
-  transition: all 0.2s ease;
-}
-
-.modern-input:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); /* Corporate Blue */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

@@ -1,260 +1,159 @@
 import { useContext, useState } from 'react';
 import { NavLink, Outlet, Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../providers/AuthProviders';
-import logo from '../../assets/logo.png';
-import { 
-    HiOutlineWrench, 
-    HiOutlinePlusCircle, 
-    HiOutlineClipboardDocumentList, 
-    HiOutlineCalendarDays, 
-    HiOutlineSquares2X2, 
+import { AuthContext } from '../../providers/AuthProvider';
+import {
+    HiOutlineWrench,
+    HiOutlinePlusCircle,
+    HiOutlineClipboardDocumentList,
+    HiOutlineCalendarDays,
+    HiOutlineSquares2X2,
     HiOutlineArrowLeftOnRectangle,
     HiOutlineHome,
     HiOutlineBars3,
     HiOutlineXMark,
     HiOutlineSun,
-    HiOutlineMoon
-} from "react-icons/hi2";
+    HiOutlineMoon,
+} from 'react-icons/hi2';
+
+const SIDEBAR_LINKS = [
+    { name: 'Overview',         path: '/dashboard',                     icon: HiOutlineSquares2X2,            end: true },
+    { name: 'Add service',      path: '/dashboard/add-service',         icon: HiOutlinePlusCircle },
+    { name: 'Manage services',  path: '/dashboard/manage-service',      icon: HiOutlineWrench },
+    { name: 'Booked services',  path: '/dashboard/booked-services',     icon: HiOutlineCalendarDays },
+    { name: 'Service to do',    path: '/dashboard/service-to-do',       icon: HiOutlineClipboardDocumentList },
+];
+
+const NavItem = ({ link, onClick }) => {
+    const Icon = link.icon;
+    return (
+        <NavLink
+            to={link.path}
+            end={link.end}
+            onClick={onClick}
+            className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2 rounded text-sm font-medium transition-colors ${
+                    isActive
+                        ? 'text-zinc-900 dark:text-white bg-zinc-100 dark:bg-zinc-800'
+                        : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-800/50'
+                }`
+            }
+        >
+            <Icon className="w-4 h-4 flex-shrink-0" />
+            {link.name}
+        </NavLink>
+    );
+};
 
 const DashboardLayout = () => {
     const { user, logOut, isDark, setIsDark } = useContext(AuthContext);
-    const [isMobileOpen, setIsMobileOpen] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleLogOut = () => {
-        logOut()
-            .then(() => {
-                navigate('/');
-            })
-            .catch((error) => {
-                console.error("Logout error:", error);
-            });
+        logOut().then(() => navigate('/')).catch(() => {});
     };
 
-    const sidebarLinks = [
-        {
-            name: "Overview",
-            path: "/dashboard",
-            icon: HiOutlineSquares2X2,
-            end: true
-        },
-        {
-            name: "Add Service",
-            path: "/dashboard/add-service",
-            icon: HiOutlinePlusCircle
-        },
-        {
-            name: "Manage Services",
-            path: "/dashboard/manage-service",
-            icon: HiOutlineWrench
-        },
-        {
-            name: "Booked Services",
-            path: "/dashboard/booked-services",
-            icon: HiOutlineCalendarDays
-        },
-        {
-            name: "Service To Do",
-            path: "/dashboard/service-to-do",
-            icon: HiOutlineClipboardDocumentList
-        }
-    ];
+    const SidebarContent = ({ onNav, onClose }) => (
+        <>
+            {/* Brand */}
+            <div className={`px-5 h-14 flex items-center border-b border-zinc-100 dark:border-zinc-900 flex-shrink-0 ${onClose ? 'justify-between' : ''}`}>
+                <Link to="/" className="text-sm font-black tracking-tight text-zinc-900 dark:text-white hover:opacity-80 transition-opacity">
+                    Electro<span className="text-accent">Fixers</span>
+                </Link>
+                {onClose && (
+                    <button onClick={onClose} className="btn-ghost p-1">
+                        <HiOutlineXMark className="w-5 h-5" />
+                    </button>
+                )}
+            </div>
+
+            {/* User info */}
+            {user && (
+                <div className="px-5 py-4 border-b border-zinc-100 dark:border-zinc-900 flex items-center gap-3 flex-shrink-0">
+                    <img
+                        src={user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName || 'U')}&background=18181b&color=fff`}
+                        onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName || 'U')}&background=18181b&color=fff`; }}
+                        alt={user.displayName || 'User'}
+                        className="w-8 h-8 rounded-full object-cover border border-zinc-200 dark:border-zinc-700"
+                    />
+                    <div className="min-w-0">
+                        <p className="text-sm font-semibold text-zinc-900 dark:text-white truncate">{user.displayName}</p>
+                        <p className="text-xs text-zinc-400 truncate">{user.email}</p>
+                    </div>
+                </div>
+            )}
+
+            {/* Nav */}
+            <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+                {SIDEBAR_LINKS.map((link) => (
+                    <NavItem key={link.path} link={link} onClick={onNav} />
+                ))}
+            </nav>
+
+            {/* Footer */}
+            <div className="px-3 py-4 border-t border-zinc-100 dark:border-zinc-900 space-y-1 flex-shrink-0">
+                <button
+                    onClick={() => setIsDark(isDark === 'dark' ? 'light' : 'dark')}
+                    className="btn-ghost w-full justify-between text-xs"
+                >
+                    <span>{isDark === 'dark' ? 'Light mode' : 'Dark mode'}</span>
+                    {isDark === 'dark'
+                        ? <HiOutlineSun className="w-4 h-4" />
+                        : <HiOutlineMoon className="w-4 h-4" />}
+                </button>
+                <Link to="/" className="btn-ghost w-full text-xs">
+                    <HiOutlineHome className="w-4 h-4" />
+                    Back to site
+                </Link>
+                <button onClick={handleLogOut} className="w-full flex items-center gap-2 px-3 py-2 rounded text-xs font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-950 transition-colors">
+                    <HiOutlineArrowLeftOnRectangle className="w-4 h-4" />
+                    Log out
+                </button>
+            </div>
+        </>
+    );
 
     return (
-        <div className={`min-h-screen flex flex-col lg:flex-row ${isDark === 'dark' ? "dark bg-slate-900 text-slate-100" : "bg-slate-50 text-slate-900"} transition-colors duration-300 relative font-sans`}>
+        <div className={`min-h-screen flex ${
+            isDark === 'dark' ? 'dark bg-zinc-950 text-zinc-100' : 'bg-zinc-50 text-zinc-900'
+        }`}>
 
-            {/* Desktop Left Sidebar (Sticky) */}
-            <aside className="hidden lg:flex flex-col w-72 h-screen sticky top-0 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 z-20">
-                
-                {/* Brand Logo & Name */}
-                <div className="p-6 border-b border-slate-200 dark:border-slate-800">
-                    <Link to="/" className="flex items-center gap-3 group">
-                        <img src={logo} alt="ElectroFixers Logo" className="w-10 h-8 object-contain group-hover:scale-105 transition-all duration-300" />
-                        <span className="text-lg font-extrabold tracking-tight text-slate-800 dark:text-slate-100">
-                            ELECTRO<span className="text-blue-600">FIXERS</span>
-                        </span>
-                    </Link>
-                </div>
-
-                {/* Quick Profile Section */}
-                <div className="p-6 flex flex-col items-center text-center border-b border-slate-200 dark:border-slate-800 space-y-3">
-                    <div className="relative group">
-                        <img 
-                            src={user?.photoURL || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} 
-                            alt={user?.displayName || "User"} 
-                            className="w-20 h-20 rounded-full object-cover border-2 border-blue-600/80 p-0.5 shadow-sm"
-                        />
-                    </div>
-                    <div>
-                        <h4 className="font-bold text-slate-800 dark:text-slate-200 text-base line-clamp-1">{user?.displayName || "Expert Fixer"}</h4>
-                        <span className="inline-flex items-center px-2.5 py-0.5 mt-1.5 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-900/20 text-blue-600 border border-blue-200 dark:border-blue-800">
-                            🛠️ Service Provider
-                        </span>
-                    </div>
-                </div>
-
-                {/* Sidebar Navigation */}
-                <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
-                    {sidebarLinks.map((link) => {
-                        const Icon = link.icon;
-                        return (
-                            <NavLink
-                                key={link.path}
-                                to={link.path}
-                                end={link.end}
-                                className={({ isActive }) => 
-                                    `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-300 group ${
-                                        isActive 
-                                            ? "text-white bg-blue-600 shadow-sm" 
-                                            : "text-slate-600 dark:text-slate-400 hover:text-blue-600 hover:bg-slate-50 dark:hover:bg-slate-800/50"
-                                    }`
-                                }
-                            >
-                                <Icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
-                                {link.name}
-                            </NavLink>
-                        );
-                    })}
-                </nav>
-
-                {/* Sidebar Footer Actions */}
-                <div className="p-4 border-t border-slate-200 dark:border-slate-800 space-y-2">
-                    <button
-                        onClick={() => setIsDark(isDark === 'dark' ? 'light' : 'dark')}
-                        className="flex w-full items-center justify-between px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-blue-600/30 text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-all text-sm font-semibold"
-                    >
-                        <span>Theme Mode</span>
-                        {isDark === 'dark' ? <HiOutlineSun className="w-5 h-5 text-blue-600" /> : <HiOutlineMoon className="w-5 h-5 text-blue-600" />}
-                    </button>
-                    <button 
-                        onClick={handleLogOut}
-                        className="flex w-full items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold text-rose-500 hover:bg-rose-500/5 dark:hover:bg-rose-500/10 transition-all"
-                    >
-                        <HiOutlineArrowLeftOnRectangle className="w-5 h-5" />
-                        Log Out
-                    </button>
-                </div>
+            {/* Desktop sidebar */}
+            <aside className="hidden lg:flex flex-col w-56 h-screen sticky top-0 bg-white dark:bg-zinc-950 border-r border-zinc-100 dark:border-zinc-900">
+                <SidebarContent onNav={null} />
             </aside>
 
-            {/* Mobile Top Navigation Bar */}
-            <header className="lg:hidden h-16 w-full sticky top-0 flex items-center justify-between px-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 z-20">
-                <div className="flex items-center gap-3">
-                    <button 
-                        onClick={() => setIsMobileOpen(true)}
-                        className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
-                        aria-label="Open dashboard menu"
-                    >
-                        <HiOutlineBars3 className="w-6 h-6" />
-                    </button>
-                    <span className="text-base font-extrabold tracking-tight text-slate-800 dark:text-slate-100">
-                        Provider <span className="text-blue-600">Panel</span>
-                    </span>
-                </div>
-                
-                <Link to="/" className="p-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors">
-                    <HiOutlineHome className="w-6 h-6" />
+            {/* Mobile top bar */}
+            <div className="lg:hidden fixed top-0 left-0 right-0 z-30 h-14 flex items-center justify-between px-4 bg-white dark:bg-zinc-950 border-b border-zinc-100 dark:border-zinc-900">
+                <button onClick={() => setMobileOpen(true)} className="btn-ghost p-2" aria-label="Open menu">
+                    <HiOutlineBars3 className="w-5 h-5" />
+                </button>
+                <span className="text-sm font-black tracking-tight text-zinc-900 dark:text-white">
+                    Electro<span className="text-accent">Fixers</span>
+                </span>
+                <Link to="/" className="btn-ghost p-2">
+                    <HiOutlineHome className="w-4 h-4" />
                 </Link>
-            </header>
+            </div>
 
-            {/* Mobile Sidebar Overlay Drawer */}
-            <div className={`lg:hidden fixed inset-0 z-50 transition-opacity duration-300 ${isMobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-                
-                {/* Backdrop Blur Overlay */}
-                <div 
-                    onClick={() => setIsMobileOpen(false)}
-                    className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-                />
-
-                {/* Sliding Content Drawer */}
-                <aside className={`absolute inset-y-0 left-0 w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-xl flex flex-col transform transition-transform duration-300 ease-in-out z-10 ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}`}>
-                    
-                    {/* Header */}
-                    <div className="p-5 flex items-center justify-between border-b border-slate-200 dark:border-slate-800">
-                        <span className="text-base font-extrabold tracking-tight text-slate-800 dark:text-slate-100">
-                            ELECTRO<span className="text-blue-600">FIXERS</span>
-                        </span>
-                        <button 
-                            onClick={() => setIsMobileOpen(false)}
-                            className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
-                        >
-                            <HiOutlineXMark className="w-6 h-6" />
-                        </button>
-                    </div>
-
-                    {/* Quick Profile Section */}
-                    <div className="p-5 flex items-center gap-3.5 bg-slate-50 dark:bg-slate-800/30 border-b border-slate-200 dark:border-slate-800">
-                        <img 
-                            src={user?.photoURL || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} 
-                            alt={user?.displayName || "User"} 
-                            className="w-12 h-12 rounded-full object-cover border-2 border-blue-600/80 p-0.5 shadow-sm bg-white dark:bg-slate-900"
-                        />
-                        <div>
-                            <h4 className="font-bold text-slate-800 dark:text-slate-200 text-sm line-clamp-1">{user?.displayName || "Expert Fixer"}</h4>
-                            <span className="text-[10px] text-blue-600 font-semibold uppercase tracking-wider">
-                                Provider Panel
-                            </span>
-                        </div>
-                    </div>
-
-                    {/* Navigation */}
-                    <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-                        {sidebarLinks.map((link) => {
-                            const Icon = link.icon;
-                            return (
-                                <NavLink
-                                    key={link.path}
-                                    to={link.path}
-                                    end={link.end}
-                                    onClick={() => setIsMobileOpen(false)}
-                                    className={({ isActive }) => 
-                                        `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                                            isActive 
-                                                ? "text-white bg-blue-600 shadow-sm" 
-                                                : "text-slate-600 dark:text-slate-400 hover:text-blue-600 hover:bg-slate-50 dark:hover:bg-slate-800/50"
-                                        }`
-                                    }
-                                >
-                                    <Icon className="w-5 h-5" />
-                                    {link.name}
-                                </NavLink>
-                            );
-                        })}
-                    </nav>
-
-                    {/* Footer Actions */}
-                    <div className="p-4 border-t border-slate-200 dark:border-slate-800 space-y-2">
-                        <button
-                            onClick={() => {
-                                setIsDark(isDark === 'dark' ? 'light' : 'dark');
-                                setIsMobileOpen(false);
-                            }}
-                            className="flex w-full items-center justify-between px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-blue-600 text-sm font-semibold"
-                        >
-                            <span>Theme Mode</span>
-                            {isDark === 'dark' ? <HiOutlineSun className="w-5 h-5 text-blue-600" /> : <HiOutlineMoon className="w-5 h-5 text-blue-600" />}
-                        </button>
-                        <button 
-                            onClick={() => {
-                                setIsMobileOpen(false);
-                                handleLogOut();
-                            }}
-                            className="flex w-full items-center gap-3 px-4 py-2 rounded-xl text-sm font-semibold text-rose-500 hover:bg-rose-500/5 transition-all"
-                        >
-                            <HiOutlineArrowLeftOnRectangle className="w-5 h-5" />
-                            Log Out
-                        </button>
-                    </div>
-
+            {/* Mobile drawer */}
+            <div className={`lg:hidden fixed inset-0 z-50 transition-all duration-200 ${
+                mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            }`}>
+                <div onClick={() => setMobileOpen(false)} className="absolute inset-0 bg-black/30" />
+                <aside className={`absolute inset-y-0 left-0 w-56 bg-white dark:bg-zinc-950 border-r border-zinc-100 dark:border-zinc-900 flex flex-col transform transition-transform duration-200 ${
+                    mobileOpen ? 'translate-x-0' : '-translate-x-full'
+                }`}>
+                    <SidebarContent onNav={() => setMobileOpen(false)} onClose={() => setMobileOpen(false)} />
                 </aside>
             </div>
 
-            {/* Right Panel Main Content Workspace */}
-            <main className="flex-1 relative z-10 p-4 md:p-8 overflow-x-hidden min-h-screen">
-                <div className="max-w-7xl mx-auto py-4">
+            {/* Main content */}
+            <main className="flex-1 min-h-screen pt-14 lg:pt-0 overflow-x-hidden">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
                     <Outlet />
                 </div>
             </main>
-
         </div>
     );
 };

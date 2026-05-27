@@ -29,8 +29,6 @@ const BookNow = () => {
 
         const newBookedService = { serviceId, serviceName, serviceImage, providerEmail, providerName, price, userEmail, userName, serviceDate, instructions, status };
 
-        console.log(newBookedService);
-
         fetch('https://elctrofixers-client-side.vercel.app/book-service', {
             method: "POST",
             headers: {

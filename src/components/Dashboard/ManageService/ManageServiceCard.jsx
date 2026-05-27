@@ -31,7 +31,6 @@ const ManageServiceCard = ({ service }) => {
                             else {
                                 swal("Error", "Something went wrong. Please try again!", "error");
                             }
-                            console.log(data);
                         })
                 }
             });

@@ -1,209 +1,187 @@
-import Banner from "./Banner/Banner";
-import DocumentTitle from './../../documentTitle/DocumentTitle';
-import { Link, useLoaderData } from "react-router-dom";
-import PopularServicesCard from "./PopularServicesCard";
-import { useContext, useEffect, useState } from "react";
-import Client from "./Client";
-import { AuthContext } from "../../providers/AuthProviders";
-import logo from "../../assets/logo.png"
+import { Link, useLoaderData } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
+import Banner from './Banner';
+import ServiceCard from '../ui/ServiceCard';
+import ClientReviewCard from './ClientReviewCard';
+import PageHeader from '../ui/PageHeader';
+
+const FAQS = [
+    {
+        q: 'What services does ElectroFixers offer?',
+        a: 'We provide comprehensive electronic repair solutions including smartphones, gaming consoles, PCs, laptops, televisions, and smart appliances.',
+    },
+    {
+        q: 'How do I book a service?',
+        a: 'Navigate to a service, click "View details", then "Book appointment". Fill in your preferred date and any special instructions.',
+    },
+    {
+        q: 'What additional features are available?',
+        a: 'Registered providers can manage listings, monitor bookings, and track repair statuses from their personal dashboard.',
+    },
+    {
+        q: 'How does authentication work?',
+        a: 'We use Firebase Authentication supporting email/password login and one-click Google Sign-In.',
+    },
+    {
+        q: 'Is the site mobile-friendly?',
+        a: 'Yes — the interface is fully responsive and works seamlessly on phones, tablets, and desktops.',
+    },
+];
 
 const Home = () => {
-    DocumentTitle('Home');
+    useDocumentTitle('Home');
     const services = useLoaderData();
     const [clients, setClients] = useState([]);
-    const { isDark } = useContext(AuthContext);
+    const [openFaq, setOpenFaq] = useState(0);
 
     useEffect(() => {
-        fetch('review.json')
-            .then(res => res.json())
-            .then(data => setClients(data));
+        fetch('/review.json')
+            .then((r) => r.json())
+            .then(setClients)
+            .catch(() => {});
     }, []);
 
     return (
-        <div className="space-y-24 pb-20">
+        <div>
+            {/* Hero */}
             <Banner />
 
-            {/* Popular services */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-                <div className="text-center max-w-3xl mx-auto space-y-4">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-xs font-semibold uppercase tracking-wider">
-                        ⚡ Top Rated
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-black tracking-tight text-slate-800 dark:text-slate-100">
-                        Popular <span className="text-gradient-orange">Services</span>
-                    </h2>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base leading-relaxed">
-                        Discover our most in-demand electronic repair services, trusted by thousands of customers. From cracked smartphone displays to corrupted hard drives, our experts handle it all with certified parts.
-                    </p>
-                </div>
-                
-                {/* 3-Column Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {
-                        services.slice(0, 6).map(service => (
-                            <PopularServicesCard key={service._id} service={service} />
-                        ))
-                    }
-                </div>
-                
-                <div className="text-center pt-4">
-                    <Link to={`/all-services`}>
-                        <button className="px-8 py-3.5 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold rounded-2xl shadow-lg shadow-orange-500/25 hover:scale-[1.03] active:scale-[0.98] transition-all">
-                            View All Services
-                        </button>
-                    </Link>
-                </div>
-            </div>
+            {/* Popular Services */}
+            <hr className="border-zinc-200 dark:border-zinc-800 mx-auto max-w-6xl" />
+            <section className="py-20">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-10">
+                    <PageHeader
+                        eyebrow="Popular services"
+                        heading="What we fix"
+                        description="Our most-booked electronic repair services, trusted by thousands of customers across the country."
+                    />
 
-            {/* Clients Review */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-                <div className="text-center max-w-3xl mx-auto space-y-4">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-xs font-semibold uppercase tracking-wider">
-                        💬 Testimonials
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-black tracking-tight text-slate-800 dark:text-slate-100">
-                        What Our <span className="text-gradient-orange">Clients Say</span>
-                    </h2>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base leading-relaxed">
-                        Read real feedback from customers who experienced our fast, high-quality, and transparent device repair services.
-                    </p>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {
-                        clients.map((client, index) => (
-                            <Client key={index} client={client} />
-                        ))
-                    }
-                </div>
-            </div>
-
-            {/* Frequently Asked Question */}
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-                <div className="text-center space-y-4">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-xs font-semibold uppercase tracking-wider">
-                        ❓ Help Center
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-black tracking-tight text-slate-800 dark:text-slate-100">
-                        Frequently Asked <span className="text-gradient-orange">Questions</span>
-                    </h2>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                        Got questions? We have got answers. Find quick details about our booking process, repair warranties, and more.
-                    </p>
-                </div>
-
-                <div className="space-y-4 pt-4">
-                    <div className="collapse collapse-plus border border-slate-100 dark:border-white/5 bg-white dark:bg-[#130E26]/50 rounded-2xl shadow-sm transition-all duration-300">
-                        <input type="radio" name="my-accordion-3" defaultChecked />
-                        <div className="collapse-title text-base md:text-lg font-bold text-slate-800 dark:text-slate-200">
-                            What services does the website offer?
-                        </div>
-                        <div className="collapse-content text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                            <p>We provide comprehensive electronic repair solutions including smartphones, gaming consoles, PCs/laptops, television units, and smart appliances.</p>
-                        </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {services.slice(0, 6).map((service) => (
+                            <ServiceCard key={service._id} service={service} />
+                        ))}
                     </div>
 
-                    <div className="collapse collapse-plus border border-slate-100 dark:border-white/5 bg-white dark:bg-[#130E26]/50 rounded-2xl shadow-sm transition-all duration-300">
-                        <input type="radio" name="my-accordion-3" />
-                        <div className="collapse-title text-base md:text-lg font-bold text-slate-800 dark:text-slate-200">
-                            How can users book a service?
-                        </div>
-                        <div className="collapse-content text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                            <p>Simply navigate to a service card, click "View Details", and then click "Book Now". Fill out our modern scheduling form with your repair date, special instructions, and confirm.</p>
-                        </div>
-                    </div>
-
-                    <div className="collapse collapse-plus border border-slate-100 dark:border-white/5 bg-white dark:bg-[#130E26]/50 rounded-2xl shadow-sm transition-all duration-300">
-                        <input type="radio" name="my-accordion-3" />
-                        <div className="collapse-title text-base md:text-lg font-bold text-slate-800 dark:text-slate-200">
-                            What additional features does the website provide?
-                        </div>
-                        <div className="collapse-content text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                            <p>Beyond booking, registered service providers can manage their offerings, create new repair postings, monitor customer schedules, and track active work statuses in their dynamic dashboard panels.</p>
-                        </div>
-                    </div>
-
-                    <div className="collapse collapse-plus border border-slate-100 dark:border-white/5 bg-white dark:bg-[#130E26]/50 rounded-2xl shadow-sm transition-all duration-300">
-                        <input type="radio" name="my-accordion-3" />
-                        <div className="collapse-title text-base md:text-lg font-bold text-slate-800 dark:text-slate-200">
-                            How does the website handle user authentication?
-                        </div>
-                        <div className="collapse-content text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                            <p>We leverage the Context API paired with robust Firebase Authentication to enable email/password sign-ins as well as one-click Google Social Single Sign-On (SSO) securely.</p>
-                        </div>
-                    </div>
-
-                    <div className="collapse collapse-plus border border-slate-100 dark:border-white/5 bg-white dark:bg-[#130E26]/50 rounded-2xl shadow-sm transition-all duration-300">
-                        <input type="radio" name="my-accordion-3" />
-                        <div className="collapse-title text-base md:text-lg font-bold text-slate-800 dark:text-slate-200">
-                            Is the website responsive?
-                        </div>
-                        <div className="collapse-content text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                            <p>Yes, absolutely! ElectroFixers is designed with full responsiveness using Tailwind grids, meaning the UI scales flawlessly whether you are on a phone, tablet, or large desktop monitor.</p>
-                        </div>
+                    <div className="text-center">
+                        <Link to="/all-services" className="btn-outline">
+                            View all services &rarr;
+                        </Link>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            {/* About US Section (Sleek Dual Column) */}
-            <div id="about-us" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className={`p-8 md:p-16 rounded-3xl border transition-all duration-300 ${isDark === 'dark' ? "bg-[#130E26]/40 border-white/5 shadow-2xl" : "bg-white border-slate-100 shadow-xl"}`}>
+            {/* Testimonials */}
+            {clients.length > 0 && (
+                <>
+                    <hr className="border-zinc-200 dark:border-zinc-800 mx-auto max-w-6xl" />
+                    <section className="py-20">
+                    <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-10">
+                        <PageHeader
+                            eyebrow="Testimonials"
+                            heading="What our customers say"
+                            description="Real feedback from customers who experienced our fast, high-quality repair services."
+                        />
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                            {clients.map((client, i) => (
+                                <ClientReviewCard key={i} client={client} />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+                </>
+            )}
+
+            {/* About */}
+            <hr className="border-zinc-200 dark:border-zinc-800 mx-auto max-w-6xl" />
+            <section id="about" className="py-20">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        
-                        {/* Left Side: Text Details */}
-                        <div className="space-y-6">
-                            <span className="inline-flex items-center px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-xs font-semibold uppercase tracking-wider">
-                                🛠️ Who We Are
-                            </span>
-                            <h2 className="text-3xl md:text-5xl font-black text-slate-800 dark:text-slate-100 leading-tight">
-                                Delivering Excellence in <span className="text-gradient-orange">Gadget Services</span>
+                        <div className="space-y-5">
+                            <p className="eyebrow">About us</p>
+                            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-zinc-900 dark:text-white">
+                                Precision repair,<br />every time.
                             </h2>
-                            <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base leading-relaxed">
-                                Welcome to ElectroFixers, your ultimate solution for high-quality electronics repair. Our certified specialists carry years of experience in troubleshooting hardware and software malfunctions.
+                            <p className="text-sm md:text-base text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                                ElectroFixers is your premier destination for high-quality electronics repair. Our certified specialists carry years of experience troubleshooting hardware and software issues across all major device brands.
                             </p>
-                            <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base leading-relaxed">
-                                We pride ourselves on transparent pricing, premium warranty protections, and fast turnaround times. We understand the vital role that smartphones, consoles, and computers play in your daily life, which is why we complete most repairs on the same day.
+                            <p className="text-sm md:text-base text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                                We deliver transparent pricing, warranty protection, and fast turnarounds — because we know how essential your devices are to daily life.
                             </p>
-                            
-                            <div className="grid grid-cols-2 gap-6 pt-4">
-                                <div className="space-y-2">
-                                    <span className="text-3xl font-black text-orange-500">10k+</span>
-                                    <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Devices Fixed</p>
-                                </div>
-                                <div className="space-y-2">
-                                    <span className="text-3xl font-black text-orange-500">99.8%</span>
-                                    <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Client Satisfaction</p>
-                                </div>
-                            </div>
+                            <Link to="/all-services" className="btn-primary inline-flex">
+                                Explore services
+                            </Link>
                         </div>
 
-                        {/* Right Side: High-tech Branding Column */}
-                        <div className="relative flex justify-center items-center">
-                            {/* Floating background glows */}
-                            <div className="absolute w-[200px] h-[200px] bg-orange-500/20 rounded-full blur-[80px] pointer-events-none animate-pulse-glow"></div>
-                            
-                            {/* Brand Card Graphic */}
-                            <div className="backdrop-blur-md bg-orange-500/5 dark:bg-white/5 border border-orange-500/10 dark:border-white/10 p-10 rounded-3xl w-full max-w-md shadow-2xl flex flex-col items-center justify-center space-y-6 text-center group hover:border-orange-500/30 transition-all duration-300">
-                                <img src={logo} className="w-32 h-28 object-contain animate-float-slow" alt="ElectroFixers Emblem" />
-                                <div className="space-y-2">
-                                    <h3 className="text-2xl font-black text-slate-800 dark:text-slate-200">
-                                        ElectroFixers Inc.
-                                    </h3>
-                                    <p className="text-xs text-slate-400 font-semibold uppercase tracking-widest">
-                                        Established 2024
-                                    </p>
+                        <div className="grid grid-cols-2 gap-5">
+                            {[
+                                { stat: '10k+',  label: 'Devices repaired' },
+                                { stat: '99.8%', label: 'Client satisfaction' },
+                                { stat: 'Same day', label: 'Turnaround available' },
+                                { stat: '2024',   label: 'Established' },
+                            ].map(({ stat, label }) => (
+                                <div key={label} className="card-minimal p-6 space-y-1">
+                                    <p className="text-2xl font-black text-zinc-900 dark:text-white">{stat}</p>
+                                    <p className="text-xs text-zinc-400">{label}</p>
                                 </div>
-                                <div className="w-full h-[1px] bg-slate-200/50 dark:bg-white/5"></div>
-                                <p className="text-xs text-slate-400 italic">
-                                    "Precision diagnostics, authentic components, and reliable repair support."
-                                </p>
-                            </div>
+                            ))}
                         </div>
-
                     </div>
                 </div>
-            </div>
+            </section>
 
+            {/* FAQ */}
+            <hr className="border-zinc-200 dark:border-zinc-800 mx-auto max-w-6xl" />
+            <section className="py-24 bg-white dark:bg-zinc-950">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+                        {/* FAQ Header */}
+                        <div className="lg:col-span-5 space-y-5 lg:sticky lg:top-24">
+                            <p className="eyebrow">FAQ</p>
+                            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-zinc-900 dark:text-white">
+                                Have questions?
+                            </h2>
+                            <p className="text-sm md:text-base text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-md">
+                                Find answers to common questions about our repair services, warranties, and platform features.
+                            </p>
+                            <div className="pt-2">
+                                <Link to="/all-services" className="btn-outline">
+                                    Browse all services
+                                </Link>
+                            </div>
+                        </div>
+
+                        {/* Accordion */}
+                        <div className="lg:col-span-7">
+                            <div className="card-minimal divide-y divide-zinc-100 dark:divide-zinc-800">
+                                {FAQS.map((faq, i) => (
+                                    <div key={i} className="px-6">
+                                        <button
+                                            onClick={() => setOpenFaq(openFaq === i ? -1 : i)}
+                                            className="w-full flex items-center justify-between py-6 text-left gap-4 group"
+                                        >
+                                            <span className="text-sm font-bold text-zinc-900 dark:text-white group-hover:text-accent transition-colors">{faq.q}</span>
+                                            <span className={`w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center text-zinc-500 transition-transform duration-200 flex-shrink-0 ${
+                                                openFaq === i ? 'rotate-180 bg-zinc-100 dark:bg-zinc-700 text-zinc-900 dark:text-white' : ''
+                                            }`}>
+                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d={openFaq === i ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"} />
+                                                </svg>
+                                            </span>
+                                        </button>
+                                        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaq === i ? 'max-h-96 opacity-100 pb-6' : 'max-h-0 opacity-0'}`}>
+                                            <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed pr-10">
+                                                {faq.a}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };
